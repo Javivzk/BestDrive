@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Bestdrive</string>
+    <string name="verified">Verified</string>
+    <string name="doit">Do</string>
+    <string name="details">Details</string>
+    <string name="delete">Delete</string>
+    <string name="task_detail">Notice Detail</string>
+    <string name="modify">Modify</string>
+    <string name="are_you_sure_message">¿Are you sure?</string>
+    <string name="remove_notice_message">Delete notice</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="save_message">Save</string>
+    <string name="return_message">Return</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="owner">Publisher</string>
+    <string name="select_location_message">Select a location in the map</string>
+    <string name="task_registered_message">Notice registered</string>
+    <string name="task_registered_error">An error has ocurred. Check that data is valid</string>
+    <string name="remember_message">Remember not to use the app while driving.</string>
+    <string name="navigate">Navigate</string>
+    <string name="view_map">View Map</string>
+    <string name="view_notices">View Notices</string>
+    <string name="add_item">Add item</string>
+    <string name="view_settings">View Settings</string>
+</resources>

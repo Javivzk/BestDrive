@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:theme="@style/Theme.Material3.Light">
+
+
+    <item
+        android:id="@+id/registe
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="@string/add_item"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/view_map"
+        android:icon="@android:drawable/ic_dialog_map"
+        android:title="@string/view_map"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/view_settings"
+        android:icon="@drawable/settings_89381"
+        android:title="@string/view_settings"
+        app:showAsAction="always" />
+
+</menu>
