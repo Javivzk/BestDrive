@@ -22,6 +22,4 @@
     <string name="navigate">Navegar</string>
     <string name="view_map">Ver Mapa</string>
     <string name="view_notices">Ver Avisos</string>
-    <string name="add_item">Añadir item</string>
-    <string name="view_settings">Ver Preferencias</string>
 </resources>
