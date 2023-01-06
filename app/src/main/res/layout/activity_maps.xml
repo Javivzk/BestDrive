@@ -24,6 +24,13 @@
             android:clickable="true"
             app:srcCompat="@android:drawable/ic_delete"
             tools:ignore="SpeakableTextPresentCheck" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btUbicacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="16dp"
+            tools:ignore="VectorDrawableCompat"/>
     </com.mapbox.maps.MapView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

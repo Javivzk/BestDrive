@@ -53,6 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="modifyButtonClicked"
             android:text="@string/modify" />
 
         <com.google.android.material.button.MaterialButton
@@ -60,6 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="deleteButtonClicked"
             android:text="@string/delete" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

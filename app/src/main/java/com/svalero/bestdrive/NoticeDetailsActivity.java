@@ -6,7 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,7 +37,9 @@ public class NoticeDetailsActivity extends AppCompatActivity {
                 .allowMainThreadQueries().build();
         Notice notice = db.noticeDao().getByName(name);
         fillData(notice);
+
     }
+
 
     private void fillData(Notice notice) {
         TextView tvName = findViewById(R.id.tv_notice_name);
@@ -43,5 +49,10 @@ public class NoticeDetailsActivity extends AppCompatActivity {
         tvName.setText(notice.getName());
         tvDescription.setText(notice.getDescription());
         tvOwner.setText(notice.getPublisher());
+    }
+
+    public void modifyButtonClicked(View view) {
+        Intent intent = new Intent(this,ModifyNoticeActivity.class);
+        startActivity(intent);
     }
 }

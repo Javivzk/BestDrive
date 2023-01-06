@@ -8,6 +8,8 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import com.google.android.gms.location.LocationServices;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mapbox.geojson.Point;
 import com.mapbox.maps.CameraOptions;
 import com.mapbox.maps.MapView;
@@ -27,6 +29,8 @@ public class MapsActivity extends AppCompatActivity {
 
     private MapView mapView;
     private PointAnnotationManager pointAnnotationManager;
+    private FloatingActionButton btUbicacion;
+    private LocationServices servicioUbicacion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +79,7 @@ public class MapsActivity extends AppCompatActivity {
                 .build();
         mapView.getMapboxMap().setCamera(cameraPosition);
     }
+
 
 
 }
