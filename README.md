@@ -3,7 +3,10 @@
 Actividad de Aprendizaje de Programacion Multimedia y Dispositivos Moviles
 
 ## Comenzando 🚀
-
+La app está enfocada a ser una aplicacion para registrar avisos de tipo obras, radares, etc.
+Los avisos se registran en el mapa, podemos eliminarlos y modificarlos.
+Tambien he añadido la funcionalidad de poder hacer fotos con la camara, aunque no he conseguido guardarlas.
+El primer boton que seria para Navegacion aun no he conseguido implementarlo, mi intencion era hacer una especie de Google Maps con GPS.
 
 ## Requisitos básicos
 - [x] La aplicación contará con, al menos, 7 Activities, utilizando controles ImageView, TextView, Button, CheckBox y RecyclerView para recoger y presentar información en pantalla y se hará, como mínimo, en dos idiomas
@@ -12,7 +15,7 @@ Actividad de Aprendizaje de Programacion Multimedia y Dispositivos Moviles
 
 - [x] La aplicación contará con un menú de opciones o ActionBar desde donde se podrá acceder a las acciones que el usuario pueda realizar en cada Activity.
 
-- [ ] Añadir alguna función que interactúe con otras aplicaciones del dispositivo (cámara, contactos, . . .)
+- [x] Añadir alguna función que interactúe con otras aplicaciones del dispositivo (cámara, contactos, . . .)
 
 - [x] Se mostrará información útil para la aplicación en un mapa (GoogleMaps o MapBox) de forma que el usuario pueda interactuar con el mismo para llevar a cabo alguna acción de utilidad para la aplicación
 
