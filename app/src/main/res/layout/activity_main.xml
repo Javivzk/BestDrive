@@ -41,6 +41,14 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/megaphone_23679"
             android:text="@string/view_notices" />
+
+        <com.google.android.material.button.MaterialButton
+
+            android:id="@+id/openCameraButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/camara"
+            android:text="@string/open_camera" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

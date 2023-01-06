@@ -26,4 +26,10 @@
     <string name="viewMapBar">View Map</string>
     <string name="view_settings_bar">View Settings</string>
     <string name="task_modified_message">Notice modified</string>
+    <string name="open_camera">Open Camera</string>
+    <string name="take_picture">Take Picture</string>
+    <string name="save_image">Save Image</string>
+
+
+
 </resources>

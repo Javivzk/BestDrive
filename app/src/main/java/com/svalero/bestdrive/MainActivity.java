@@ -25,6 +25,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         viewMapButton.setOnClickListener(this);
         Button viewNoticeButton = findViewById(R.id.viewNoticeButton);
         viewNoticeButton.setOnClickListener(this);
+        Button openCameraButton = findViewById(R.id.openCameraButton);
+        openCameraButton.setOnClickListener(this);
+
 
         Toast.makeText(this, R.string.remember_message,Toast.LENGTH_SHORT).show();
 
@@ -41,6 +44,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         } else if (view.getId() == R.id.viewNoticeButton) {
             Intent intent = new Intent(this, NoticeListActivity.class);
+            startActivity(intent);
+        }else if (view.getId() == R.id.openCameraButton){
+            Intent intent = new Intent(this, CameraActivity.class);
             startActivity(intent);
         }
     }

@@ -26,4 +26,7 @@
     <string name="viewMapBar">Ver Mapa</string>
     <string name="view_settings_bar">Ver Preferencias</string>
     <string name="task_modified_message">Aviso modificado</string>
+    <string name="open_camera">Abrir Camara</string>
+    <string name="take_picture">Hacer Foto</string>
+    <string name="save_image">Guardar Imagen</string>
 </resources>
