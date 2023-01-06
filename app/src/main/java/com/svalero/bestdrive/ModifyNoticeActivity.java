@@ -70,10 +70,10 @@ public class ModifyNoticeActivity extends AppCompatActivity {
         final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
                 .allowMainThreadQueries().build();
         try {
-            db.noticeDao().insert(notice);
-            db.noticeDao().delete(notice);
+            db.noticeDao().update(notice);
 
-            Toast.makeText(this, R.string.task_registered_message, Toast.LENGTH_LONG).show();
+
+            Toast.makeText(this, R.string.task_modified_message, Toast.LENGTH_LONG).show();
             nameField.setText("");
             descriptionField.setText("");
             publisherField.setText("");
@@ -104,6 +104,7 @@ public class ModifyNoticeActivity extends AppCompatActivity {
     private void removeAllMarkers() {
         pointAnnotationManager.deleteAll();
     }
+
 }
 
 

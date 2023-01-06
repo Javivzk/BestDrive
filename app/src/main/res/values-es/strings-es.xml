@@ -19,10 +19,11 @@
     <string name="task_registered_message">Aviso registrado</string>
     <string name="task_registered_error">Ha ocurrido un error, revisa los datos introducidos</string>
     <string name="remember_message">Recuerda que no debes utilizar la app mientras estas conduciendo</string>
-    <string name="navigate">Navegar</string>
+    <string name="navigate">Navegar(En construccion)</string>
     <string name="view_map">Ver Mapa</string>
     <string name="view_notices">Ver Avisos</string>
     <string name="AddItem">Añadir Aviso</string>
     <string name="viewMapBar">Ver Mapa</string>
     <string name="view_settings_bar">Ver Preferencias</string>
+    <string name="task_modified_message">Aviso modificado</string>
 </resources>

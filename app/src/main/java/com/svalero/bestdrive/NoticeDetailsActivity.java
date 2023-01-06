@@ -5,6 +5,7 @@ import static com.svalero.bestdrive.db.Constants.DATABASE_NAME;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -55,4 +56,5 @@ public class NoticeDetailsActivity extends AppCompatActivity {
         Intent intent = new Intent(this,ModifyNoticeActivity.class);
         startActivity(intent);
     }
+
 }

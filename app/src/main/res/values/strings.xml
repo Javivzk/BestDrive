@@ -19,10 +19,11 @@
     <string name="task_registered_message">Notice registered</string>
     <string name="task_registered_error">An error has ocurred. Check that data is valid</string>
     <string name="remember_message">Remember not to use the app while driving.</string>
-    <string name="navigate">Navigate</string>
+    <string name="navigate">Navigate(In construction)</string>
     <string name="view_map">View Map</string>
     <string name="view_notices">View Notices</string>
     <string name="AddItem">Add Notice</string>
     <string name="viewMapBar">View Map</string>
     <string name="view_settings_bar">View Settings</string>
+    <string name="task_modified_message">Notice modified</string>
 </resources>

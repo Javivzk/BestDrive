@@ -30,4 +30,5 @@ public interface NoticeDao {
 
     @Update
     void update(Notice notice);
+
 }
