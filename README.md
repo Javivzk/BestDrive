@@ -8,7 +8,7 @@ Actividad de Aprendizaje de Programacion Multimedia y Dispositivos Moviles
 ## Requisitos básicos
 - [x] La aplicación contará con, al menos, 7 Activities, utilizando controles ImageView, TextView, Button, CheckBox y RecyclerView para recoger y presentar información en pantalla y se hará, como mínimo, en dos idiomas
 
-- [ ] Se deberán usar Bases de datos para almacenar información. El usuario deberá ser capaz de registrar, modificar, eliminar y visualizar en un RecyclerView esa información con un adaptador personalizado (Un CRUD completo). El modelo de datos de la aplicación estará compuesto, al menos, de 3 clases.
+- [x] Se deberán usar Bases de datos para almacenar información. El usuario deberá ser capaz de registrar, modificar, eliminar y visualizar en un RecyclerView esa información con un adaptador personalizado (Un CRUD completo). El modelo de datos de la aplicación estará compuesto, al menos, de 3 clases.
 
 - [x] La aplicación contará con un menú de opciones o ActionBar desde donde se podrá acceder a las acciones que el usuario pueda realizar en cada Activity.
 
