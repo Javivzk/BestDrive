@@ -10,11 +10,11 @@ Actividad de Aprendizaje de Programacion Multimedia y Dispositivos Moviles
 
 - [ ] Se deberán usar Bases de datos para almacenar información. El usuario deberá ser capaz de registrar, modificar, eliminar y visualizar en un RecyclerView esa información con un adaptador personalizado (Un CRUD completo). El modelo de datos de la aplicación estará compuesto, al menos, de 3 clases.
 
-- [ ] La aplicación contará con un menú de opciones o ActionBar desde donde se podrá acceder a las acciones que el usuario pueda realizar en cada Activity.
+- [x] La aplicación contará con un menú de opciones o ActionBar desde donde se podrá acceder a las acciones que el usuario pueda realizar en cada Activity.
 
 - [ ] Añadir alguna función que interactúe con otras aplicaciones del dispositivo (cámara, contactos, . . .)
 
-- [ ] Se mostrará información útil para la aplicación en un mapa (GoogleMaps o MapBox) de forma que el usuario pueda interactuar con el mismo para llevar a cabo alguna acción de utilidad para la aplicación
+- [x] Se mostrará información útil para la aplicación en un mapa (GoogleMaps o MapBox) de forma que el usuario pueda interactuar con el mismo para llevar a cabo alguna acción de utilidad para la aplicación
 
 ### Pre-requisitos 📋
 
