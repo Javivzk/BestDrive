@@ -19,6 +19,18 @@ El primer boton que seria para Navegacion aun no he conseguido implementarlo, mi
 
 - [x] Se mostrará información útil para la aplicación en un mapa (GoogleMaps o MapBox) de forma que el usuario pueda interactuar con el mismo para llevar a cabo alguna acción de utilidad para la aplicación
 
+## Otras funcionalidades (1 pto cada una)
+
+- [x] Utilizar diálogos siempre que sea necesario (al modificar o eliminar información, por ejemplo)
+- [x] Utiliza la herramienta Git (y GitHub) durante todo el desarrollo de la aplicación. Utiliza el gestor de Issues para los problemas/fallos que vayan surgiendo
+- [ ] Utilizar el GPS del dispositivo para realizar alguna función sobre el mapa
+- [x] Añadir un menú de preferencias con al menos 3 opciones que modifiquen el comportamiento de la aplicación. Este menú estará siempre disponible en el ActionBar
+- [x] Diseñar algunos layouts para otras posiciones de la pantalla (portrait/landscape)
+- [ ] Utilizar imágenes como atributos de algún objeto (y almacenarlo en la base de datos)
+- [x] Emplear Fragments en el diseño de alguna de las Activities de la aplicación
+- [x] Utilizar Material Design para personalizar el diseño de la aplicación
+
+
 ### Pre-requisitos 📋
 
 
