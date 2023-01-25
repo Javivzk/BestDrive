@@ -18,7 +18,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        Button registerButton = findViewById(R.id.registerButton);
+        registerButton.setOnClickListener(this);
         Button navigateButton = findViewById(R.id.navigateButton);
         navigateButton.setOnClickListener(this);
         Button viewMapButton = findViewById(R.id.viewMapButton);
@@ -48,7 +49,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }else if (view.getId() == R.id.openCameraButton){
             Intent intent = new Intent(this, CameraActivity.class);
             startActivity(intent);
-        }
+        } else if (view.getId() == R.id.registerButton){
+            Intent intent = new Intent(this, RegisterNoticeActivity.class);
+            startActivity(intent);
+    }
     }
 
 

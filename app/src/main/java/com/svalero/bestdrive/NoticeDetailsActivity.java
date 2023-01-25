@@ -8,6 +8,7 @@ import androidx.room.Room;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -43,18 +44,42 @@ public class NoticeDetailsActivity extends AppCompatActivity {
 
 
     private void fillData(Notice notice) {
-        TextView tvName = findViewById(R.id.tv_notice_name);
-        TextView tvDescription = findViewById(R.id.tv_notice_description);
-        TextView tvOwner = findViewById(R.id.tv_notice_publisher);
+        EditText etName = findViewById(R.id.et_notice_name);
+        EditText etDescription = findViewById(R.id.et_notice_description);
+        EditText etOwner = findViewById(R.id.et_notice_publisher);
 
-        tvName.setText(notice.getName());
-        tvDescription.setText(notice.getDescription());
-        tvOwner.setText(notice.getPublisher());
+        etName.setText(notice.getName());
+        etDescription.setText(notice.getDescription());
+        etOwner.setText(notice.getPublisher());
     }
 
-    public void modifyButtonClicked(View view) {
-        Intent intent = new Intent(this,ModifyNoticeActivity.class);
-        startActivity(intent);
-    }
+    public void modifyNotice(View view) {
+        Intent intent = getIntent();
 
+        String name = intent.getStringExtra("name");
+        if (name == null)
+            return;
+
+        final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
+                .allowMainThreadQueries().build();
+
+        Notice newNotice = db.noticeDao().getByName(name);
+
+        EditText descriptionField = findViewById(R.id.et_notice_description);
+        EditText publisherField = findViewById(R.id.et_notice_publisher);
+
+        newNotice.setDescription(descriptionField.getText().toString());
+        newNotice.setPublisher(publisherField.getText().toString());
+
+
+        try {
+            db.noticeDao().getByName(newNotice.getName());
+            db.noticeDao().update(newNotice);
+            Toast.makeText(this, R.string.notice_modified_message, Toast.LENGTH_LONG).show();
+            onBackPressed();
+        } catch (SQLiteConstraintException sce) {
+            Toast.makeText(this, "El aviso no existe", Toast.LENGTH_LONG).show();
+
+        }
+    }
 }

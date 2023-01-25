@@ -2,10 +2,18 @@ package com.svalero.bestdrive;
 
 import static com.svalero.bestdrive.db.Constants.DATABASE_NAME;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.room.Room;
 
 import com.google.android.gms.location.LocationServices;
@@ -13,15 +21,18 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mapbox.geojson.Point;
 import com.mapbox.maps.CameraOptions;
 import com.mapbox.maps.MapView;
+import com.mapbox.maps.MapboxMap;
 import com.mapbox.maps.plugin.annotation.AnnotationConfig;
 import com.mapbox.maps.plugin.annotation.AnnotationPlugin;
 import com.mapbox.maps.plugin.annotation.AnnotationPluginImplKt;
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManager;
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManagerKt;
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions;
+import com.mapbox.maps.plugin.locationcomponent.LocationProvider;
 import com.svalero.bestdrive.R;
 import com.svalero.bestdrive.db.AppDatabase;
 import com.svalero.bestdrive.domain.Notice;
+
 
 import java.util.List;
 
@@ -31,6 +42,7 @@ public class MapsActivity extends AppCompatActivity {
     private PointAnnotationManager pointAnnotationManager;
     private FloatingActionButton btUbicacion;
     private LocationServices servicioUbicacion;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +56,7 @@ public class MapsActivity extends AppCompatActivity {
                 .allowMainThreadQueries().build();
         List<Notice> notices = db.noticeDao().getAll();
         addNoticesToMap(notices);
+
     }
 
     private void addNoticesToMap(List<Notice> notices) {
@@ -79,7 +92,5 @@ public class MapsActivity extends AppCompatActivity {
                 .build();
         mapView.getMapboxMap().setCamera(cameraPosition);
     }
-
-
 
 }

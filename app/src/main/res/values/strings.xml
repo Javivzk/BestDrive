@@ -29,7 +29,8 @@
     <string name="open_camera">Open Camera</string>
     <string name="take_picture">Take Picture</string>
     <string name="save_image">Save Image</string>
-
+    <string name="notice_modified_message">Notice modified</string>
+    <string name="register_notice">Register notice</string>
 
 
 </resources>
