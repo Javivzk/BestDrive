@@ -36,11 +36,11 @@
 
         <com.google.android.material.button.MaterialButton
 
-            android:id="@+id/viewNoticeButton"
+            android:id="@+id/viewLibraryButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/megaphone_23679"
-            android:text="@string/view_notices" />
+            android:text="@string/view_libraries" />
 
         <com.google.android.material.button.MaterialButton
 

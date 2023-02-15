@@ -2,18 +2,10 @@ package com.svalero.bestdrive;
 
 import static com.svalero.bestdrive.db.Constants.DATABASE_NAME;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.room.Room;
 
 import com.google.android.gms.location.LocationServices;
@@ -21,17 +13,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mapbox.geojson.Point;
 import com.mapbox.maps.CameraOptions;
 import com.mapbox.maps.MapView;
-import com.mapbox.maps.MapboxMap;
 import com.mapbox.maps.plugin.annotation.AnnotationConfig;
 import com.mapbox.maps.plugin.annotation.AnnotationPlugin;
 import com.mapbox.maps.plugin.annotation.AnnotationPluginImplKt;
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManager;
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManagerKt;
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions;
-import com.mapbox.maps.plugin.locationcomponent.LocationProvider;
-import com.svalero.bestdrive.R;
 import com.svalero.bestdrive.db.AppDatabase;
-import com.svalero.bestdrive.domain.Notice;
+import com.svalero.bestdrive.domain.Library;
 
 
 import java.util.List;
@@ -54,18 +43,18 @@ public class MapsActivity extends AppCompatActivity {
 
         final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
                 .allowMainThreadQueries().build();
-        List<Notice> notices = db.noticeDao().getAll();
+        List<Library> notices = db.libraryDao().getAll();
         addNoticesToMap(notices);
 
     }
 
-    private void addNoticesToMap(List<Notice> notices) {
-        for (Notice notice : notices) {
+    private void addNoticesToMap(List<Library> notices) {
+        for (Library notice : notices) {
             Point point = Point.fromLngLat(notice.getLongitude(), notice.getLatitude());
             addMarker(point, notice.getName());
         }
 
-        Notice lastNotice = notices.get(notices.size() - 1);
+        Library lastNotice = notices.get(notices.size() - 1);
         setCameraPosition(Point.fromLngLat(lastNotice.getLongitude(), lastNotice.getLatitude()));
     }
 
