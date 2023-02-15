@@ -12,16 +12,15 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.svalero.bestdrive.R;
-import com.svalero.bestdrive.adapter.NoticeAdapter;
-import com.svalero.bestdrive.domain.Notice;
+import com.svalero.bestdrive.adapter.LibraryAdapter;
+import com.svalero.bestdrive.domain.Library;
 
 import java.util.List;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private List<Notice> noticeList;
-    private NoticeAdapter adapter;
+    private List<Library> noticeList;
+    private LibraryAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +46,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }

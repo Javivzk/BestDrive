@@ -4,19 +4,26 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/register_notice"
+        android:id="@+id/register_library"
         android:icon="@android:drawable/ic_menu_add"
-        android:title="Item"
+        android:title="@string/AddItem"
         app:showAsAction="always" />
     <item
         android:id="@+id/view_map"
         android:icon="@android:drawable/ic_dialog_map"
-        android:title="Ver Mapa"
+        android:title="@string/viewMapBar"
         app:showAsAction="always" />
     <item
         android:id="@+id/view_settings"
         android:icon="@drawable/settings_89381"
-        android:title="Ver Settings"
+        android:title="@string/view_settings_bar"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/view_profile"
+        android:icon="@android:drawable/ic_menu_agenda"
+        android:title="@string/my_profile_mssg"
+        app:showAsAction="always" />
+
 
 </menu>

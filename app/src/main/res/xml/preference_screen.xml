@@ -2,7 +2,7 @@
 <androidx.preference.PreferenceScreen
 
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    <PreferenceCategory app:title="General Settings">
     <SwitchPreferenceCompat
         app:key="notifications"
         app:title="Enable notifications"/>
@@ -11,5 +11,19 @@
         app:key="your_name"
         app:title="Your name"
         app:summary="Type your name"/>
+    </PreferenceCategory>
+    <PreferenceCategory app:title="Advanced Settings">
+
+    <SwitchPreferenceCompat
+        app:key="dark_mode"
+        app:title="Enable dark mode"/>
+
+    <ListPreference
+        app:key="language"
+        app:title="Language"
+        app:summary="Select the app's language"
+        app:entries="@array/language_array"
+        app:entryValues="@array/language_value_array" />
+    </PreferenceCategory>
 
 </androidx.preference.PreferenceScreen>

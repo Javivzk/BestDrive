@@ -18,6 +18,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/registerButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@android:drawable/ic_menu_add"
+            android:text="@string/register_library" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/navigateButton"
@@ -36,11 +42,19 @@
 
         <com.google.android.material.button.MaterialButton
 
-            android:id="@+id/viewNoticeButton"
+            android:id="@+id/viewLibraryButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/megaphone_23679"
-            android:text="@string/view_notices" />
+            android:text="@string/view_libraries" />
+
+        <com.google.android.material.button.MaterialButton
+
+            android:id="@+id/openCameraButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/camera"
+            android:text="@string/open_camera" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

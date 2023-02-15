@@ -7,8 +7,10 @@ import androidx.room.PrimaryKey;
 
 
 @Entity
-public class Notice {
-    @PrimaryKey
+public class Library {
+
+    @PrimaryKey(autoGenerate = true)
+    private long id;
     @NonNull
     private String name;
     @ColumnInfo
@@ -22,11 +24,11 @@ public class Notice {
     @ColumnInfo
     private double longitude;
 
-    public Notice(){
+    public Library(){
 
     }
 
-    public Notice(String name, String description, String publisher, boolean verify, double latitude, double longitude) {
+    public Library(String name, String description, String publisher, boolean verify, double latitude, double longitude) {
         this.name = name;
         this.description = description;
         this.publisher = publisher;
@@ -35,6 +37,13 @@ public class Notice {
         this.longitude = longitude;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public boolean isVerify() {
         return verify;

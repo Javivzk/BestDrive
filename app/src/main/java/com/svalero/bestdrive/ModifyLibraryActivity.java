@@ -2,15 +2,15 @@ package com.svalero.bestdrive;
 
 import static com.svalero.bestdrive.db.Constants.DATABASE_NAME;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
+
 import android.database.sqlite.SQLiteConstraintException;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -24,27 +24,23 @@ import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManagerKt;
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions;
 import com.mapbox.maps.plugin.gestures.GesturesPlugin;
 import com.mapbox.maps.plugin.gestures.GesturesUtils;
-import com.svalero.bestdrive.R;
 import com.svalero.bestdrive.db.AppDatabase;
-import com.svalero.bestdrive.domain.Notice;
+import com.svalero.bestdrive.domain.Library;
 
-import java.util.Date;
+public class ModifyLibraryActivity extends AppCompatActivity {
 
-public class RegisterNoticeActivity extends AppCompatActivity {
-
-    private MapView noticeMap;
+    private MapView libraryMap;
     private Point point;
     private PointAnnotationManager pointAnnotationManager;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_notice);
+        setContentView(R.layout.activity_modify_library);
 
-        noticeMap = findViewById(R.id.noticeMap);
+        libraryMap = findViewById(R.id.libraryMap);
 
-        GesturesPlugin gesturesPlugin = GesturesUtils.getGestures(noticeMap);
+        GesturesPlugin gesturesPlugin = GesturesUtils.getGestures(libraryMap);
         gesturesPlugin.addOnMapClickListener(point -> {
             removeAllMarkers();
             this.point = point;
@@ -56,14 +52,13 @@ public class RegisterNoticeActivity extends AppCompatActivity {
     }
 
     public void saveButton(View view) {
-        EditText etName = findViewById(R.id.edit_text_name);
-        EditText etDescription = findViewById(R.id.edit_text_description);
-        EditText etPublisher = findViewById(R.id.edit_text_publisher);
+        EditText nameField = (EditText) findViewById(R.id.edit_text_name);
+        EditText descriptionField = (EditText) findViewById(R.id.edit_text_description);
+        EditText publisherField = (EditText) findViewById(R.id.edit_text_publisher);
 
-
-        String name = etName.getText().toString();
-        String description = etDescription.getText().toString();
-        String publisher = etPublisher.getText().toString();
+        String name = nameField.getText().toString();
+        String description = descriptionField.getText().toString();
+        String publisher = publisherField.getText().toString();
 
 
         if (point == null) {
@@ -71,25 +66,26 @@ public class RegisterNoticeActivity extends AppCompatActivity {
             return;
         }
 
-        Notice notice = new Notice(name, description, publisher,false, point.latitude(), point.longitude());
+        Library library = new Library(name, description, publisher,false, point.latitude(), point.longitude());
         final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
                 .allowMainThreadQueries().build();
         try {
-            db.noticeDao().insert(notice);
+            db.libraryDao().update(library);
 
-            Toast.makeText(this, R.string.task_registered_message, Toast.LENGTH_LONG).show();
-            etName.setText("");
-            etDescription.setText("");
-            etPublisher.setText("");
-            etName.requestFocus();
+
+            Toast.makeText(this, R.string.task_modified_message, Toast.LENGTH_LONG).show();
+            nameField.setText("");
+            descriptionField.setText("");
+            publisherField.setText("");
+            nameField.requestFocus();
         } catch (SQLiteConstraintException sce) {
-            Snackbar.make(etName, R.string.task_registered_error, BaseTransientBottomBar.LENGTH_LONG).show();
+            Snackbar.make(nameField, R.string.task_registered_error, BaseTransientBottomBar.LENGTH_LONG).show();
             //Toast.makeText(this, R.string.task_registered_error, Toast.LENGTH_LONG).show();
         }
     }
 
     private void initializePointManager() {
-        AnnotationPlugin annotationPlugin = AnnotationPluginImplKt.getAnnotations(noticeMap);
+        AnnotationPlugin annotationPlugin = AnnotationPluginImplKt.getAnnotations(libraryMap);
         AnnotationConfig annotationConfig = new AnnotationConfig();
         pointAnnotationManager = PointAnnotationManagerKt.createPointAnnotationManager(annotationPlugin, annotationConfig);
     }
@@ -108,4 +104,7 @@ public class RegisterNoticeActivity extends AppCompatActivity {
     private void removeAllMarkers() {
         pointAnnotationManager.deleteAll();
     }
+
 }
+
+

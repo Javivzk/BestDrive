@@ -13,18 +13,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        Button registerButton = findViewById(R.id.registerButton);
+        registerButton.setOnClickListener(this);
         Button navigateButton = findViewById(R.id.navigateButton);
         navigateButton.setOnClickListener(this);
         Button viewMapButton = findViewById(R.id.viewMapButton);
         viewMapButton.setOnClickListener(this);
-        Button viewNoticeButton = findViewById(R.id.viewNoticeButton);
+        Button viewNoticeButton = findViewById(R.id.viewLibraryButton);
         viewNoticeButton.setOnClickListener(this);
+        Button openCameraButton = findViewById(R.id.openCameraButton);
+        openCameraButton.setOnClickListener(this);
+
 
         Toast.makeText(this, R.string.remember_message,Toast.LENGTH_SHORT).show();
 
@@ -39,10 +44,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (view.getId() == R.id.viewMapButton) {
             Intent intent = new Intent(this, MapsActivity.class);
             startActivity(intent);
-        } else if (view.getId() == R.id.viewNoticeButton) {
-            Intent intent = new Intent(this, NoticeListActivity.class);
+        } else if (view.getId() == R.id.viewLibraryButton) {
+            Intent intent = new Intent(this, LibraryListActivity.class);
             startActivity(intent);
-        }
+        }else if (view.getId() == R.id.openCameraButton){
+            Intent intent = new Intent(this, CameraActivity.class);
+            startActivity(intent);
+        } else if (view.getId() == R.id.registerButton){
+            Intent intent = new Intent(this, RegisterLibraryActivity.class);
+            startActivity(intent);
+    }
     }
 
 
@@ -54,8 +65,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.register_notice) {
-            Intent intent = new Intent(this, RegisterNoticeActivity.class);
+        if (item.getItemId() == R.id.register_library) {
+            Intent intent = new Intent(this, RegisterLibraryActivity.class);
             startActivity(intent);
             return true;
         }else if (item.getItemId() == R.id.view_map) {
@@ -64,6 +75,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }else if (item.getItemId() == R.id.view_settings) {
             Intent intent = new Intent(this, PreferencesActivity.class);
             startActivity(intent);
+        }else if (item.getItemId() == R.id.view_profile) {
+            Intent intent = new Intent(this, ViewProfileActivity.class);
+            startActivity(intent);
         }
         return false;
     }
@@ -71,4 +85,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void continueButton(View view) {
 
     }
+
+
 }
