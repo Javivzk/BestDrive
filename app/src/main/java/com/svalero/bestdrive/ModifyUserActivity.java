@@ -47,8 +47,8 @@ public class ModifyUserActivity extends AppCompatActivity {
         et_modifyUserUsername.setText(user.getUserName());
         et_modifyUserPassword.setText(user.getPassword());
         et_modifyUserEmail.setText(user.getEmail());
-        et_modifyUserLastName.setText(user.getLastName());
         et_modifyUserPhone.setText(user.getPhone());
+        et_modifyUserLastName.setText(user.getLastName());
     }
 
     public void modifyUser(View view) {
@@ -75,6 +75,7 @@ public class ModifyUserActivity extends AppCompatActivity {
         et_modifyUserEmail.setText("");
         et_modifyUserLastName.setText("");
         et_modifyUserPhone.setText("");
+
 
     }
 

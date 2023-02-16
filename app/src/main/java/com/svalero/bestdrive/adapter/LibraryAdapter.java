@@ -103,7 +103,7 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryH
     private void deleteLibrary(int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(R.string.are_you_sure_message)
-                .setTitle(R.string.remove_notice_message)
+                .setTitle(R.string.remove_book_message)
                 .setPositiveButton(R.string.yes, ((dialog, id) -> {
                     final AppDatabase db = Room.databaseBuilder(context, AppDatabase.class, "library")
                             .allowMainThreadQueries().build();

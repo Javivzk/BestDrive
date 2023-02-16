@@ -5,10 +5,12 @@
     <string name="doit">Hacer</string>
     <string name="details">Detalles</string>
     <string name="delete">Eliminar</string>
-    <string name="task_detail">Detalles del aviso</string>
+    <string name="task_book_detail">Detalles del libro</string>
+    <string name="task_detail">Detalles de la libreria</string>
     <string name="modify">Modificar</string>
     <string name="are_you_sure_message">¿Estas seguro?</string>
-    <string name="remove_notice_message">Eliminar aviso</string>
+    <string name="remove_library_message">Eliminar Libreria</string>
+    <string name="remove_book_message">Eliminar Libro</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
     <string name="save_message">Guardar</string>
@@ -74,6 +76,19 @@
     <string name="title_lastname_mssg">Apellido</string>
     <string name="title_phone_mssg">Telefono</string>
     <string name="my_profile_mssg">Mi perfil</string>
+    <string name="book_modified_message">Libro modificado</string>
+    <string name="task_book_registered_message">Libro Registrado</string>
+    <string name="title">Titulo</string>
+    <string name="author">Autor</string>
+    <string name="register_book">Registrar libro</string>
+    <string name="view_books">Ver Libros</string>
+    <string name="city">Ciudad</string>
+
+
+
+
+
+
 
 
 </resources>

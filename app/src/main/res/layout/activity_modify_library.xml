@@ -60,11 +60,11 @@
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/edit_text_publisher"
+            android:id="@+id/edit_text_city"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/owner"
+            android:hint="@string/city"
             android:inputType="textPersonName" />
 
     </LinearLayout>

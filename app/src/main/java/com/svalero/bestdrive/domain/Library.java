@@ -16,7 +16,7 @@ public class Library {
     @ColumnInfo
     private String description;
     @ColumnInfo
-    private String publisher;
+    private String city;
     @ColumnInfo
     private boolean verify;
     @ColumnInfo
@@ -28,10 +28,10 @@ public class Library {
 
     }
 
-    public Library(String name, String description, String publisher, boolean verify, double latitude, double longitude) {
+    public Library(String name, String description, String city, boolean verify, double latitude, double longitude) {
         this.name = name;
         this.description = description;
-        this.publisher = publisher;
+        this.city = city;
         this.verify = verify;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -69,12 +69,12 @@ public class Library {
         this.description = description;
     }
 
-    public String getPublisher() {
-        return publisher;
+    public String getCity() {
+        return city;
     }
 
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
+    public void setCity(String city) {
+        this.city = city;
     }
 
 

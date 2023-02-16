@@ -8,24 +8,21 @@
     android:padding="10dp">
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_library_name"
+        android:id="@+id/tv_book_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:textStyle="bold" />
 
-    <CheckedTextView
-        android:id="@+id/tv_library_description"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_book_author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/check_library_verified"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_book_description"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:editable="false"
-        android:enabled="false"
-        android:text="@string/verified" />
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,21 +30,14 @@
         android:orientation="horizontal">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/do_library_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/doit" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/see_details_button"
+            android:id="@+id/see_details_book_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/details" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/delete_library_button"
+            android:id="@+id/delete_book_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

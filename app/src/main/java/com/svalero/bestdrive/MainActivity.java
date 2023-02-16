@@ -19,14 +19,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button registerButton = findViewById(R.id.registerButton);
-        registerButton.setOnClickListener(this);
-        Button navigateButton = findViewById(R.id.navigateButton);
-        navigateButton.setOnClickListener(this);
+
         Button viewMapButton = findViewById(R.id.viewMapButton);
         viewMapButton.setOnClickListener(this);
-        Button viewNoticeButton = findViewById(R.id.viewLibraryButton);
-        viewNoticeButton.setOnClickListener(this);
+        Button viewLibraryButton = findViewById(R.id.viewLibraryButton);
+        viewLibraryButton.setOnClickListener(this);
+        Button viewBookButton = findViewById(R.id.viewBookButton);
+        viewBookButton.setOnClickListener(this);
         Button openCameraButton = findViewById(R.id.openCameraButton);
         openCameraButton.setOnClickListener(this);
 
@@ -38,20 +37,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.navigateButton) {
-            Intent intent = new Intent(this, PreferencesActivity.class);
-            startActivity(intent);
-        } else if (view.getId() == R.id.viewMapButton) {
-            Intent intent = new Intent(this, MapsActivity.class);
-            startActivity(intent);
+        if (view.getId() == R.id.viewMapButton) {
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
+
         } else if (view.getId() == R.id.viewLibraryButton) {
             Intent intent = new Intent(this, LibraryListActivity.class);
             startActivity(intent);
+        } else if (view.getId() == R.id.viewBookButton) {
+            Intent intent = new Intent(this, BookListActivity.class);
+            startActivity(intent);
         }else if (view.getId() == R.id.openCameraButton){
             Intent intent = new Intent(this, CameraActivity.class);
-            startActivity(intent);
-        } else if (view.getId() == R.id.registerButton){
-            Intent intent = new Intent(this, RegisterLibraryActivity.class);
             startActivity(intent);
     }
     }
@@ -77,6 +74,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }else if (item.getItemId() == R.id.view_profile) {
             Intent intent = new Intent(this, ViewProfileActivity.class);
+            startActivity(intent);
+        }else if (item.getItemId() == R.id.register_book) {
+            Intent intent = new Intent(this, RegisterBookActivity.class);
             startActivity(intent);
         }
         return false;
