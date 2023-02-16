@@ -54,11 +54,11 @@ public class ModifyLibraryActivity extends AppCompatActivity {
     public void saveButton(View view) {
         EditText nameField = (EditText) findViewById(R.id.edit_text_name);
         EditText descriptionField = (EditText) findViewById(R.id.edit_text_description);
-        EditText publisherField = (EditText) findViewById(R.id.edit_text_publisher);
+        EditText cityField = (EditText) findViewById(R.id.edit_text_city);
 
         String name = nameField.getText().toString();
         String description = descriptionField.getText().toString();
-        String publisher = publisherField.getText().toString();
+        String city = cityField.getText().toString();
 
 
         if (point == null) {
@@ -66,7 +66,7 @@ public class ModifyLibraryActivity extends AppCompatActivity {
             return;
         }
 
-        Library library = new Library(name, description, publisher,false, point.latitude(), point.longitude());
+        Library library = new Library(name, description, city,false, point.latitude(), point.longitude());
         final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
                 .allowMainThreadQueries().build();
         try {
@@ -76,7 +76,7 @@ public class ModifyLibraryActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.task_modified_message, Toast.LENGTH_LONG).show();
             nameField.setText("");
             descriptionField.setText("");
-            publisherField.setText("");
+            cityField.setText("");
             nameField.requestFocus();
         } catch (SQLiteConstraintException sce) {
             Snackbar.make(nameField, R.string.task_registered_error, BaseTransientBottomBar.LENGTH_LONG).show();

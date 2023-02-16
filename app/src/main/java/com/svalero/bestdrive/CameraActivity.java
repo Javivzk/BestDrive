@@ -30,6 +30,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class CameraActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -93,7 +95,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
             }
         }else if (requestCode == REQUEST_PERMISSION_WRITE_STORAGE) {
             if (permissions.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                saveImage();
+                saveImage(bitmap);
             }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -120,7 +122,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P){
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                 if (ActivityCompat.checkSelfPermission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
-                    saveImage();
+                    saveImage(bitmap);
                 }else{
                     ActivityCompat.requestPermissions(
                             this,
@@ -129,10 +131,10 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
                     );
                 }
             }else{
-                saveImage();
+                saveImage(bitmap);
             }
         }else{
-            saveImage();
+            saveImage(bitmap);
         }
     }
 
@@ -144,62 +146,17 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    private void saveImage(){
-        OutputStream outputStream = null;
-        File file = null;
-        
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
-            ContentResolver resolver = getContentResolver();
-            ContentValues values = new ContentValues();
-            
-            String fileName = System.currentTimeMillis() + "image_example";
-            
-            values.put(MediaStore.Images.Media.DISPLAY_NAME,fileName);
-            values.put(MediaStore.Images.Media.MIME_TYPE,"img/jpeg");
-            values.put(MediaStore.Images.Media.RELATIVE_PATH,"Pictures/MyApp");
-            values.put(MediaStore.Images.Media.IS_PENDING,1);
+    private void saveImage(Bitmap bitmap) {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + ".jpg";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File imageFile = new File(storageDir, imageFileName);
 
-            Uri collection = MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY);
-            Uri imageUri = resolver.insert(collection,values);
-
-            try{
-                outputStream = resolver.openOutputStream(imageUri);
-            }catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-
-            values.clear();
-            values.put(MediaStore.Images.Media.IS_PENDING,0);
-            resolver.update(imageUri,values,null,null);
-        }else{
-            String imageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString();
-
-            String fileName = System.currentTimeMillis() + ".jpg";
-
-            file = new File(imageDir,fileName);
-
-            try{
-                outputStream = new FileOutputStream(file);
-            }catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
-
-        boolean saved = bitmap.compress(Bitmap.CompressFormat.JPEG,100,outputStream);
-        if (saved){
-            Toast.makeText(this,"Picture was saved succesfully", Toast.LENGTH_SHORT).show();
-        }
-
-        if (outputStream!=null){
-            try {
-                outputStream.flush();
-                outputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        if (file!=null){
-            MediaScannerConnection.scanFile(this,new String[]{file.toString()},null,null);
+        try (FileOutputStream out = new FileOutputStream(imageFile)) {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            Toast.makeText(this, "Imagen guardada en " + imageFile.getAbsolutePath(), Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

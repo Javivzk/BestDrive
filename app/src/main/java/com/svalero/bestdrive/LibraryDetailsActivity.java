@@ -40,11 +40,11 @@ public class LibraryDetailsActivity extends AppCompatActivity {
     private void fillData(Library library) {
         EditText etName = findViewById(R.id.et_library_name);
         EditText etDescription = findViewById(R.id.et_library_description);
-        EditText etOwner = findViewById(R.id.et_library_publisher);
+        EditText etOwner = findViewById(R.id.et_library_city);
 
         etName.setText(library.getName());
         etDescription.setText(library.getDescription());
-        etOwner.setText(library.getPublisher());
+        etOwner.setText(library.getCity());
     }
 
     public void modifyLibrary(View view) {
@@ -60,10 +60,10 @@ public class LibraryDetailsActivity extends AppCompatActivity {
         Library newLibrary = db.libraryDao().getByName(name);
 
         EditText descriptionField = findViewById(R.id.et_library_description);
-        EditText publisherField = findViewById(R.id.et_library_publisher);
+        EditText publisherField = findViewById(R.id.et_library_city);
 
         newLibrary.setDescription(descriptionField.getText().toString());
-        newLibrary.setPublisher(publisherField.getText().toString());
+        newLibrary.setCity(publisherField.getText().toString());
 
 
         try {

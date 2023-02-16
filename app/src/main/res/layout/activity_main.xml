@@ -18,35 +18,35 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/registerButton"
+
+        <ImageView
+            android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@android:drawable/ic_menu_add"
-            android:text="@string/register_library" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/navigateButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/map_route_10854"
-            android:text="@string/navigate" />
-
-        <com.google.android.material.button.MaterialButton
-
-            android:id="@+id/viewMapButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/map_search_find_maps_10803"
-            android:text="@string/view_map" />
+            app:srcCompat="@drawable/libreria" />
 
         <com.google.android.material.button.MaterialButton
 
             android:id="@+id/viewLibraryButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/megaphone_23679"
+            android:drawableLeft="@drawable/libreria2"
             android:text="@string/view_libraries" />
+
+        <com.google.android.material.button.MaterialButton
+
+            android:id="@+id/viewBookButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/openbook2"
+            android:text="@string/view_books" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/viewMapButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/map_search_find_maps_10803"
+            android:text="@string/view_map" />
 
         <com.google.android.material.button.MaterialButton
 

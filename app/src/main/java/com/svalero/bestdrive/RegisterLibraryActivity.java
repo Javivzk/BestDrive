@@ -55,12 +55,12 @@ public class RegisterLibraryActivity extends AppCompatActivity {
     public void saveButton(View view) {
         EditText etName = findViewById(R.id.edit_text_name);
         EditText etDescription = findViewById(R.id.edit_text_description);
-        EditText etPublisher = findViewById(R.id.edit_text_publisher);
+        EditText etCity = findViewById(R.id.edit_text_city);
 
 
         String name = etName.getText().toString();
         String description = etDescription.getText().toString();
-        String publisher = etPublisher.getText().toString();
+        String city = etCity.getText().toString();
 
 
         if (point == null) {
@@ -68,7 +68,7 @@ public class RegisterLibraryActivity extends AppCompatActivity {
             return;
         }
 
-        Library library = new Library(name, description, publisher,false, point.latitude(), point.longitude());
+        Library library = new Library(name, description, city,false, point.latitude(), point.longitude());
         final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
                 .allowMainThreadQueries().build();
         try {
@@ -77,7 +77,7 @@ public class RegisterLibraryActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.task_registered_message, Toast.LENGTH_LONG).show();
             etName.setText("");
             etDescription.setText("");
-            etPublisher.setText("");
+            etCity.setText("");
             etName.requestFocus();
         } catch (SQLiteConstraintException sce) {
             Snackbar.make(etName, R.string.task_registered_error, BaseTransientBottomBar.LENGTH_LONG).show();

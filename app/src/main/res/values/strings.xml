@@ -5,9 +5,11 @@
     <string name="details">Details</string>
     <string name="delete">Delete</string>
     <string name="task_detail">Library Detail</string>
+    <string name="task_book_detail">Book Detail</string>
     <string name="modify">Modify</string>
     <string name="are_you_sure_message">¿Are you sure?</string>
-    <string name="remove_notice_message">Delete notice</string>
+    <string name="remove_library_message">Delete Library</string>
+    <string name="remove_book_message">Delete Book</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="save_message">Save</string>
@@ -73,6 +75,13 @@
     <string name="title_lastname_mssg">Last Name</string>
     <string name="title_phone_mssg">Phone</string>
     <string name="my_profile_mssg">My profile</string>
+    <string name="book_modified_message">Book modified</string>
+    <string name="task_book_registered_message">Book Registered</string>
+    <string name="title">Title</string>
+    <string name="author">Author</string>
+    <string name="register_book">Register book</string>
+    <string name="view_books">View Books</string>
+    <string name="city">City</string>
 
 
 </resources>
