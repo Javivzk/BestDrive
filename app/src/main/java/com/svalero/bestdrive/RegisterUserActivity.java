@@ -1,5 +1,7 @@
 package com.svalero.bestdrive;
 
+import static com.svalero.bestdrive.db.Constants.DATABASE_NAME;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
@@ -40,12 +42,12 @@ public class RegisterUserActivity extends AppCompatActivity {
 
         User user = new User(username, password, name, lastName,email, phone);
 
-        final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, "users")
+        final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
                 .allowMainThreadQueries().build();
         try {
             db.userDao().insert(user);
 
-            Toast.makeText(this, R.string.task_registered_user, Toast.LENGTH_LONG).show();
+            Snackbar.make(etName, R.string.task_registered_user, BaseTransientBottomBar.LENGTH_LONG).show();
             etName.setText("");
             etLastName.setText("");
             etUsername.setText("");
