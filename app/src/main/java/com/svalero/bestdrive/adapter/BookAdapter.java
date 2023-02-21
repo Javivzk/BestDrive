@@ -1,5 +1,7 @@
 package com.svalero.bestdrive.adapter;
 
+import static com.svalero.bestdrive.db.Constants.DATABASE_NAME;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -92,7 +94,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
         builder.setMessage(R.string.are_you_sure_message)
                 .setTitle(R.string.remove_book_message)
                 .setPositiveButton(R.string.yes, ((dialog, id) -> {
-                    final AppDatabase db = Room.databaseBuilder(context, AppDatabase.class, "book")
+                    final AppDatabase db = Room.databaseBuilder(context, AppDatabase.class, DATABASE_NAME)
                             .allowMainThreadQueries().build();
                     Book book = bookList.get(position);
                     db.bookDao().delete(book);

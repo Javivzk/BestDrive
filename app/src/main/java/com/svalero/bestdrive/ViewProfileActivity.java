@@ -1,5 +1,7 @@
 package com.svalero.bestdrive;
 
+import static com.svalero.bestdrive.db.Constants.DATABASE_NAME;
+
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -8,8 +10,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,15 +19,12 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.room.Room;
 
-import com.svalero.bestdrive.db.AppDatabase;
-import com.svalero.bestdrive.domain.User;
 import com.svalero.bestdrive.db.AppDatabase;
 import com.svalero.bestdrive.domain.User;
 
@@ -68,7 +65,7 @@ public class ViewProfileActivity extends AppCompatActivity {
         TextView tv_profileEmail = findViewById(R.id.tv_profileEmail);
         TextView tv_profileLastName = findViewById(R.id.tv_profileLastName);
 
-        final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, "users")
+        final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
                 .allowMainThreadQueries().build();
         User user = db.userDao().getByUsername(LoginActivity.currentUser);
 
@@ -88,7 +85,7 @@ public class ViewProfileActivity extends AppCompatActivity {
         TextView tv_profileLastName = findViewById(R.id.tv_profileLastName);
 
 
-        final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, "users")
+        final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
                 .allowMainThreadQueries().build();
         User user = db.userDao().getByUsername(LoginActivity.currentUser);
 
@@ -99,13 +96,13 @@ public class ViewProfileActivity extends AppCompatActivity {
 
     }
 
-    public void modifyUser(View view) {
+    public void modifyUserButton(View view) {
         Intent intent = new Intent(this, ModifyUserActivity.class);
         startActivity(intent);
     }
 
     public void updateImg(String path) {
-        final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, "users")
+        final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
                 .allowMainThreadQueries().build();
         db.userDao().updateImgUser(LoginActivity.currentUser, path);
     }
@@ -115,7 +112,7 @@ public class ViewProfileActivity extends AppCompatActivity {
         builder.setMessage(R.string.are_you_sure_message)
                 .setTitle(R.string.remove_user_message)
                 .setPositiveButton(R.string.yes, (dialog, id) -> {
-                    final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, "users")
+                    final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
                             .allowMainThreadQueries().build();
                     User user = db.userDao().getByUsername(LoginActivity.currentUser);
 

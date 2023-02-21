@@ -13,10 +13,8 @@ import lombok.NoArgsConstructor;
 
 @Entity
 public class User {
-    @PrimaryKey(autoGenerate = true)
-    private long id;
-
-    @ColumnInfo
+    @PrimaryKey
+    @NonNull
     private String userName;
 
     @ColumnInfo
@@ -63,13 +61,6 @@ public class User {
         this.pathImg = pathImg;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         String username = etUserName.getText().toString();
         String password = etPassword.getText().toString();
 
-        final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, "users")
+        final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
                 .allowMainThreadQueries().build();
 
         User user = db.userDao().login(username, password);

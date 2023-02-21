@@ -129,7 +129,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#3F51B5"
-                android:onClick="modifyUser"
+                android:onClick="modifyUserButton"
                 android:text="@string/modify_my_profile_button_msg"
                 android:textColor="#FFFFFF" />
 
