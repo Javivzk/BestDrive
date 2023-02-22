@@ -6,10 +6,10 @@
     <string name="details">Detalles</string>
     <string name="delete">Eliminar</string>
     <string name="task_book_detail">Detalles del libro</string>
-    <string name="task_detail">Detalles de la libreria</string>
+    <string name="task_detail">Detalles de la biblioteca</string>
     <string name="modify">Modificar</string>
     <string name="are_you_sure_message">¿Estas seguro?</string>
-    <string name="remove_library_message">Eliminar Libreria</string>
+    <string name="remove_library_message">Eliminar biblioteca</string>
     <string name="remove_book_message">Eliminar Libro</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
@@ -24,11 +24,11 @@
     <string name="remember_message">Recuerda que no debes utilizar la app mientras estas conduciendo</string>
     <string name="navigate">Navegar(En construccion)</string>
     <string name="view_map">Ver Mapa</string>
-    <string name="view_libraries">Ver Avisos</string>
-    <string name="AddItem">Añadir Aviso</string>
+    <string name="view_libraries">Ver Bibliotecas</string>
+    <string name="AddItem">Añadir Biblioteca</string>
     <string name="viewMapBar">Ver Mapa</string>
     <string name="view_settings_bar">Ver Preferencias</string>
-    <string name="task_modified_message">Aviso modificado</string>
+    <string name="task_modified_message">Biblioteca modificado</string>
     <string name="open_camera">Abrir Camara</string>
     <string name="take_picture">Hacer Foto</string>
     <string name="save_image">Guardar Imagen</string>
