@@ -25,6 +25,6 @@ dependencyResolutionManagement {
         }
     }
 }
-rootProject.name = "Bestdrive"
+rootProject.name = "Bestread"
 include ':app'
 
