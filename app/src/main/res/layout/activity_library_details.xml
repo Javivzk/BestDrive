@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/Theme.Material3.Light"
+    android:theme="@style/Theme.BestRead"
 
     tools:context=".LibraryDetailsActivity">
 
@@ -24,18 +24,18 @@
             android:text="@string/task_detail"
             android:textStyle="bold" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_library_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_library_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_library_city"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

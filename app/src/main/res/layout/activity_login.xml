@@ -6,9 +6,10 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/Theme.BestRead"
     tools:context="LoginActivity">
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageViewLogin"
         android:layout_width="300dp"
         android:layout_height="300dp"
@@ -32,41 +33,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewLogin">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/loginTextUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/username"
             android:textSize="16sp" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etUserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/loginPassword" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:ems="10"
             android:inputType="textPassword" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="login"
             android:text="@string/loginButton" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
