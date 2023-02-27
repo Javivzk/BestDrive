@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:theme="@style/Theme.Material3.Light"
+    android:theme="@style/Theme.BestRead"
 
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:baselineAligned="false">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragment"
+        android:id="@+id/switch_dark_mode"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"

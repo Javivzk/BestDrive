@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:theme="@style/Theme.Material3.Light"
+    android:theme="@style/Theme.BestRead"
 
     android:padding="10dp">
 
