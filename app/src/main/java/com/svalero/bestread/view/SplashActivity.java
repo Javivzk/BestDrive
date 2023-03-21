@@ -1,4 +1,4 @@
-package com.svalero.bestread;
+package com.svalero.bestread.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.svalero.bestread.R;
 import com.svalero.bestread.adapter.LibraryAdapter;
 import com.svalero.bestread.domain.Library;
 

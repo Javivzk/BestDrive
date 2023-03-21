@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:theme="@style/Theme.BestRead"
 
-    tools:context=".MapsActivity">
+    tools:context=".view.MapsActivity">
 
     <com.mapbox.maps.MapView
         android:id="@+id/mapView"

@@ -1,4 +1,4 @@
-package com.svalero.bestread;
+package com.svalero.bestread.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;

@@ -1,4 +1,4 @@
-package com.svalero.bestread;
+package com.svalero.bestread.view;
 
 import android.os.Bundle;
 

@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:theme="@style/Theme.BestRead"
 
-    tools:context=".MainActivity">
+    tools:context=".view.BestReadView">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_splash_logo"

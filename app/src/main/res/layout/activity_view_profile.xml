@@ -7,7 +7,7 @@
     android:theme="@style/Theme.BestRead"
 
     android:background="#FFFFFF"
-    tools:context=".ViewProfileActivity">
+    tools:context=".view.ViewProfileActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout5"

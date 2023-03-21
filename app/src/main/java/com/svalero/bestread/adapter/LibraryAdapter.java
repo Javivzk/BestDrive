@@ -17,7 +17,7 @@ import androidx.room.Room;
 
 
 import com.svalero.bestread.R;
-import com.svalero.bestread.LibraryDetailsActivity;
+import com.svalero.bestread.view.LibraryDetailsActivity;
 import com.svalero.bestread.domain.Library;
 import com.svalero.bestread.db.AppDatabase;
 

@@ -1,4 +1,4 @@
-package com.svalero.bestread;
+package com.svalero.bestread.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,15 +11,29 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+import com.svalero.bestread.R;
+import com.svalero.bestread.contract.BestReadContract;
+import com.svalero.bestread.domain.Book;
+import com.svalero.bestread.presenter.BestReadPresenter;
 
+import java.util.List;
+
+public class BestReadView extends AppCompatActivity implements View.OnClickListener, BestReadContract.View {
+
+    private BestReadPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        presenter = new BestReadPresenter(this);
 
+        initializeMainScreen();
+
+    }
+
+    private void initializeMainScreen() {
         Button viewMapButton = findViewById(R.id.viewMapButton);
         viewMapButton.setOnClickListener(this);
         Button viewLibraryButton = findViewById(R.id.viewLibraryButton);
@@ -31,10 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         Toast.makeText(this, R.string.remember_message,Toast.LENGTH_SHORT).show();
-
-
     }
-
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.viewMapButton) {
@@ -45,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(this, LibraryListActivity.class);
             startActivity(intent);
         } else if (view.getId() == R.id.viewBookButton) {
-            Intent intent = new Intent(this, BookListActivity.class);
+            Intent intent = new Intent(this, BookListView.class);
             startActivity(intent);
         }else if (view.getId() == R.id.openCameraButton){
             Intent intent = new Intent(this, CameraActivity.class);
@@ -87,4 +98,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    @Override
+    public void showBooks(List<Book> books) {
+
+    }
+
+    @Override
+    public void showMessage(String message) {
+
+    }
 }
