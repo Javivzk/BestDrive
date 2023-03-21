@@ -79,7 +79,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.LibraryDetailsActivity"
+            android:name=".view.LibraryDetailsView"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -108,7 +108,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.BookDetailsActivity"
+            android:name=".view.BookDetailsView"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

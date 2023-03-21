@@ -17,7 +17,7 @@ import androidx.room.Room;
 
 
 import com.svalero.bestread.R;
-import com.svalero.bestread.view.LibraryDetailsActivity;
+import com.svalero.bestread.view.LibraryDetailsView;
 import com.svalero.bestread.domain.Library;
 import com.svalero.bestread.db.AppDatabase;
 
@@ -97,7 +97,7 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryH
     private void seeDetails(int position) {
         Library library = libraryList.get(position);
 
-        Intent intent = new Intent(context, LibraryDetailsActivity.class);
+        Intent intent = new Intent(context, LibraryDetailsView.class);
         intent.putExtra("name", library.getName());
         context.startActivity(intent);
     }
