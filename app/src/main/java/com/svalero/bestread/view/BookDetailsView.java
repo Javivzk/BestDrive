@@ -13,39 +13,33 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import com.svalero.bestread.R;
+import com.svalero.bestread.contract.BookDetailsContract;
+import com.svalero.bestread.contract.LibraryDetailsContract;
 import com.svalero.bestread.db.AppDatabase;
 import com.svalero.bestread.domain.Book;
+import com.svalero.bestread.presenter.BookDetailsPresenter;
+import com.svalero.bestread.presenter.LibraryDetailsPresenter;
 
-public class BookDetailsActivity extends AppCompatActivity {
+public class BookDetailsView extends AppCompatActivity implements BookDetailsContract.View {
+
+    private BookDetailsPresenter presenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_details);
 
+        presenter = new BookDetailsPresenter(this);
+
         Intent intent = getIntent();
         String title = intent.getStringExtra("title");
         if (title == null)
             return;
 
-        // Cargo los detalles del libro
-        final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
-                .allowMainThreadQueries().build();
-        Book book = db.bookDao().getByTitle(title);
-        fillData(book);
-
+        presenter.loadBook(title);
     }
 
-
-    private void fillData(Book book) {
-        EditText etTitle = findViewById(R.id.et_book_title);
-        EditText etAuthor = findViewById(R.id.et_book_author);
-        EditText etDescription = findViewById(R.id.et_book_description);
-
-        etTitle.setText(book.getTitle());
-        etAuthor.setText(book.getAuthor());
-        etDescription.setText(book.getDescription());
-    }
 
     public void modifyBook(View view) {
         Intent intent = getIntent();
@@ -77,4 +71,14 @@ public class BookDetailsActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void showBook(Book book) {
+        EditText etTitle = findViewById(R.id.et_book_title);
+        EditText etAuthor = findViewById(R.id.et_book_author);
+        EditText etDescription = findViewById(R.id.et_book_description);
+
+        etTitle.setText(book.getTitle());
+        etAuthor.setText(book.getAuthor());
+        etDescription.setText(book.getDescription());
+    }
 }

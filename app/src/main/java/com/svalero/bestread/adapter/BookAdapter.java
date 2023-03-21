@@ -14,7 +14,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
-import com.svalero.bestread.view.BookDetailsActivity;
+import com.svalero.bestread.view.BookDetailsView;
 import com.svalero.bestread.R;
 import com.svalero.bestread.db.AppDatabase;
 import com.svalero.bestread.domain.Book;
@@ -81,7 +81,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
     private void seeDetails(int position) {
         Book book = bookList.get(position);
 
-        Intent intent = new Intent(context, BookDetailsActivity.class);
+        Intent intent = new Intent(context, BookDetailsView.class);
         intent.putExtra("title", book.getTitle());
         context.startActivity(intent);
     }

@@ -13,39 +13,28 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.svalero.bestread.R;
+import com.svalero.bestread.contract.LibraryDetailsContract;
 import com.svalero.bestread.db.AppDatabase;
 import com.svalero.bestread.domain.Library;
+import com.svalero.bestread.presenter.LibraryDetailsPresenter;
 
 
-public class LibraryDetailsActivity extends AppCompatActivity {
+public class LibraryDetailsView extends AppCompatActivity implements LibraryDetailsContract.View {
 
+    private LibraryDetailsPresenter presenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library_details);
+
+        presenter = new LibraryDetailsPresenter(this);
 
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
         if (name == null)
             return;
 
-        // Cargo los detalles de la libreria
-        final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
-                .allowMainThreadQueries().build();
-        Library library = db.libraryDao().getByName(name);
-        fillData(library);
-
-    }
-
-
-    private void fillData(Library library) {
-        EditText etName = findViewById(R.id.et_library_name);
-        EditText etDescription = findViewById(R.id.et_library_description);
-        EditText etOwner = findViewById(R.id.et_library_city);
-
-        etName.setText(library.getName());
-        etDescription.setText(library.getDescription());
-        etOwner.setText(library.getCity());
+        presenter.loadLibrary(name);
     }
 
     public void modifyLibrary(View view) {
@@ -76,5 +65,16 @@ public class LibraryDetailsActivity extends AppCompatActivity {
             Toast.makeText(this, "La libreria no existe", Toast.LENGTH_LONG).show();
 
         }
+    }
+
+    @Override
+    public void showLibrary(Library library) {
+        EditText etName = findViewById(R.id.et_library_name);
+        EditText etDescription = findViewById(R.id.et_library_description);
+        EditText etOwner = findViewById(R.id.et_library_city);
+
+        etName.setText(library.getName());
+        etDescription.setText(library.getDescription());
+        etOwner.setText(library.getCity());
     }
 }
