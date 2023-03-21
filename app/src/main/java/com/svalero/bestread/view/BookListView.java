@@ -1,7 +1,5 @@
 package com.svalero.bestread.view;
 
-import static com.svalero.bestread.db.Constants.DATABASE_NAME;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,14 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import com.svalero.bestread.R;
 import com.svalero.bestread.adapter.BookAdapter;
 import com.svalero.bestread.contract.BookListContract;
-import com.svalero.bestread.db.AppDatabase;
 import com.svalero.bestread.domain.Book;
-import com.svalero.bestread.presenter.BestReadPresenter;
 import com.svalero.bestread.presenter.BookListPresenter;
 
 import java.util.ArrayList;
@@ -67,7 +62,7 @@ public class BookListView extends AppCompatActivity implements BookListContract.
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.register_book) {
-        Intent intent = new Intent(this, RegisterBookActivity.class);
+        Intent intent = new Intent(this, RegisterBookView.class);
         startActivity(intent);
         return true;
         }else if (item.getItemId() == R.id.view_settings) {

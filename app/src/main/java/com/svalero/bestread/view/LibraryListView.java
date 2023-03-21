@@ -1,5 +1,4 @@
 package com.svalero.bestread.view;
-import static com.svalero.bestread.db.Constants.DATABASE_NAME;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,15 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import com.svalero.bestread.R;
 import com.svalero.bestread.adapter.LibraryAdapter;
 import com.svalero.bestread.contract.LibraryListContract;
-import com.svalero.bestread.db.AppDatabase;
-import com.svalero.bestread.domain.Book;
 import com.svalero.bestread.domain.Library;
-import com.svalero.bestread.presenter.BookListPresenter;
 import com.svalero.bestread.presenter.LibraryListPresenter;
 
 import java.util.ArrayList;
@@ -71,7 +66,7 @@ public class LibraryListView extends AppCompatActivity implements LibraryListCon
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.register_library) {
-            Intent intent = new Intent(this, RegisterLibraryActivity.class);
+            Intent intent = new Intent(this, RegisterLibraryView.class);
             startActivity(intent);
             return true;
         }else if (item.getItemId() == R.id.view_map) {

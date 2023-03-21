@@ -74,7 +74,7 @@ public class BestReadView extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.register_library) {
-            Intent intent = new Intent(this, RegisterLibraryActivity.class);
+            Intent intent = new Intent(this, RegisterLibraryView.class);
             startActivity(intent);
             return true;
         }else if (item.getItemId() == R.id.view_map) {
@@ -87,7 +87,7 @@ public class BestReadView extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(this, ViewProfileActivity.class);
             startActivity(intent);
         }else if (item.getItemId() == R.id.register_book) {
-            Intent intent = new Intent(this, RegisterBookActivity.class);
+            Intent intent = new Intent(this, RegisterBookView.class);
             startActivity(intent);
         }
         return false;
