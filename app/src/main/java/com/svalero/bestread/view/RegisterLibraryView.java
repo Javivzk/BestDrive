@@ -25,14 +25,18 @@ import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions;
 import com.mapbox.maps.plugin.gestures.GesturesPlugin;
 import com.mapbox.maps.plugin.gestures.GesturesUtils;
 import com.svalero.bestread.R;
+import com.svalero.bestread.contract.RegisterLibraryContract;
 import com.svalero.bestread.db.AppDatabase;
 import com.svalero.bestread.domain.Library;
+import com.svalero.bestread.presenter.RegisterLibraryPresenter;
 
-public class RegisterLibraryActivity extends AppCompatActivity {
+public class RegisterLibraryView extends AppCompatActivity implements RegisterLibraryContract.View {
 
     private MapView libraryMap;
     private Point point;
     private PointAnnotationManager pointAnnotationManager;
+
+    private RegisterLibraryPresenter presenter;
 
 
     @Override
@@ -40,6 +44,7 @@ public class RegisterLibraryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_library);
 
+        presenter = new RegisterLibraryPresenter(this);
         libraryMap = findViewById(R.id.libraryMap);
 
         GesturesPlugin gesturesPlugin = GesturesUtils.getGestures(libraryMap);
@@ -58,11 +63,9 @@ public class RegisterLibraryActivity extends AppCompatActivity {
         EditText etDescription = findViewById(R.id.edit_text_description);
         EditText etCity = findViewById(R.id.edit_text_city);
 
-
         String name = etName.getText().toString();
         String description = etDescription.getText().toString();
         String city = etCity.getText().toString();
-
 
         if (point == null) {
             Toast.makeText(this, R.string.select_location_message, Toast.LENGTH_LONG).show();
@@ -70,20 +73,7 @@ public class RegisterLibraryActivity extends AppCompatActivity {
         }
 
         Library library = new Library(name, description, city,false, point.latitude(), point.longitude());
-        final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
-                .allowMainThreadQueries().build();
-        try {
-            db.libraryDao().insert(library);
-
-            Toast.makeText(this, R.string.task_registered_message, Toast.LENGTH_LONG).show();
-            etName.setText("");
-            etDescription.setText("");
-            etCity.setText("");
-            etName.requestFocus();
-        } catch (SQLiteConstraintException sce) {
-            Snackbar.make(etName, R.string.task_registered_error, BaseTransientBottomBar.LENGTH_LONG).show();
-            //Toast.makeText(this, R.string.task_registered_error, Toast.LENGTH_LONG).show();
-        }
+        presenter.registerLibrary(library);
     }
 
     private void initializePointManager() {
@@ -105,5 +95,25 @@ public class RegisterLibraryActivity extends AppCompatActivity {
 
     private void removeAllMarkers() {
         pointAnnotationManager.deleteAll();
+    }
+
+    @Override
+    public void showError(String errorMessage) {
+        Snackbar.make(((EditText) findViewById(R.id.edit_text_name)), errorMessage,
+                BaseTransientBottomBar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showMessage(String message) {
+        Snackbar.make(((EditText) findViewById(R.id.edit_text_name)), message,
+                BaseTransientBottomBar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void resetForm() {
+        ((EditText) findViewById(R.id.edit_text_name)).setText("");
+        ((EditText) findViewById(R.id.edit_text_description)).setText("");
+        ((EditText) findViewById(R.id.edit_text_city)).setText("");
+        ((EditText) findViewById(R.id.edit_text_name)).requestFocus();
     }
 }

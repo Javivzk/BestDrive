@@ -7,7 +7,7 @@
     android:padding="10dp"
     android:theme="@style/Theme.BestRead"
 
-    tools:context=".view.RegisterBookActivity">
+    tools:context=".view.RegisterBookView">
 
     <LinearLayout
         android:id="@+id/linearLayout"

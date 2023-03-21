@@ -14,15 +14,24 @@ import androidx.room.Room;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.svalero.bestread.R;
+import com.svalero.bestread.contract.RegisterBookContract;
+import com.svalero.bestread.contract.RegisterLibraryContract;
 import com.svalero.bestread.db.AppDatabase;
 import com.svalero.bestread.domain.Book;
+import com.svalero.bestread.presenter.RegisterBookPresenter;
+import com.svalero.bestread.presenter.RegisterLibraryPresenter;
 
-public class RegisterBookActivity extends AppCompatActivity {
+public class RegisterBookView extends AppCompatActivity implements RegisterBookContract.View{
+
+    private RegisterBookPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_book);
+
+        presenter = new RegisterBookPresenter(this);
+
     }
 
     public void saveButton(View view) {
@@ -38,20 +47,7 @@ public class RegisterBookActivity extends AppCompatActivity {
 
 
         Book book = new Book(title, author, description);
-        final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
-                .allowMainThreadQueries().build();
-        try {
-            db.bookDao().insert(book);
-
-            Toast.makeText(this, R.string.task_book_registered_message, Toast.LENGTH_LONG).show();
-            etTitle.setText("");
-            etAuthor.setText("");
-            etDescription.setText("");
-            etTitle.requestFocus();
-        } catch (SQLiteConstraintException sce) {
-            Snackbar.make(etTitle, R.string.task_registered_error, BaseTransientBottomBar.LENGTH_LONG).show();
-            //Toast.makeText(this, R.string.task_registered_error, Toast.LENGTH_LONG).show();
-        }
+        presenter.registerBook(book);
     }
 
 
@@ -60,4 +56,23 @@ public class RegisterBookActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void showError(String errorMessage) {
+        Snackbar.make(((EditText) findViewById(R.id.edit_text_title)), errorMessage,
+                BaseTransientBottomBar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showMessage(String message) {
+        Snackbar.make(((EditText) findViewById(R.id.edit_text_title)), message,
+                BaseTransientBottomBar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void resetForm() {
+        ((EditText) findViewById(R.id.edit_text_title)).setText("");
+        ((EditText) findViewById(R.id.edit_text_author)).setText("");
+        ((EditText) findViewById(R.id.edit_text_description)).setText("");
+        ((EditText) findViewById(R.id.edit_text_title)).requestFocus();
+    }
 }

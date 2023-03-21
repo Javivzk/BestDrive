@@ -13,15 +13,24 @@ import android.widget.EditText;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.svalero.bestread.R;
+import com.svalero.bestread.contract.RegisterBookContract;
+import com.svalero.bestread.contract.RegisterUserContract;
 import com.svalero.bestread.db.AppDatabase;
 import com.svalero.bestread.domain.User;
+import com.svalero.bestread.presenter.RegisterBookPresenter;
+import com.svalero.bestread.presenter.RegisterUserPresenter;
 
-public class RegisterUserActivity extends AppCompatActivity {
+public class RegisterUserView extends AppCompatActivity implements RegisterUserContract.View{
+
+    private RegisterUserPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
+
+        presenter = new RegisterUserPresenter(this);
+
     }
 
     public void register(View view){
@@ -41,28 +50,34 @@ public class RegisterUserActivity extends AppCompatActivity {
 
 
         User user = new User(username, password, name, lastName,email, phone);
+        presenter.registerUser(user);
 
-        final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
-                .allowMainThreadQueries().build();
-        try {
-            db.userDao().insert(user);
-
-            Snackbar.make(etName, R.string.task_registered_user, BaseTransientBottomBar.LENGTH_LONG).show();
-            etName.setText("");
-            etLastName.setText("");
-            etUsername.setText("");
-            etPassword.setText("");
-            etPhone.setText("");
-            etEmail.setText("");
-
-        } catch (SQLiteConstraintException sce) {
-            Snackbar.make(etName, R.string.task_registered_error, BaseTransientBottomBar.LENGTH_LONG).show();
-            //Toast.makeText(this, R.string.task_registered_error, Toast.LENGTH_LONG).show();
-        }
     }
 
     public void back(View view){
         onBackPressed();
     }
 
+    @Override
+    public void showError(String errorMessage) {
+        Snackbar.make(((EditText) findViewById(R.id.edit_text_name)), errorMessage,
+                BaseTransientBottomBar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showMessage(String message) {
+        Snackbar.make(((EditText) findViewById(R.id.edit_text_name)), message,
+                BaseTransientBottomBar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void resetForm() {
+        ((EditText) findViewById(R.id.edit_text_name)).setText("");
+        ((EditText) findViewById(R.id.edit_text_last_name)).setText("");
+        ((EditText) findViewById(R.id.edit_text_username)).setText("");
+        ((EditText) findViewById(R.id.edit_text_password)).setText("");
+        ((EditText) findViewById(R.id.edit_text_phone)).setText("");
+        ((EditText) findViewById(R.id.edit_text_email)).setText("");
+        ((EditText) findViewById(R.id.edit_text_username)).requestFocus();
+    }
 }

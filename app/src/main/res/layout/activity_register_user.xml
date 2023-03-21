@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:theme="@style/Theme.BestRead"
 
-    tools:context=".view.RegisterUserActivity">
+    tools:context=".view.RegisterUserView">
 
     <LinearLayout
         android:layout_width="0dp"
