@@ -1,4 +1,4 @@
-package com.svalero.bestread;
+package com.svalero.bestread.view;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +18,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.svalero.bestread.R;
 
 import java.io.File;
 import java.io.FileOutputStream;

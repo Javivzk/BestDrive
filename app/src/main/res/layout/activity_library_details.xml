@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:theme="@style/Theme.BestRead"
 
-    tools:context=".LibraryDetailsActivity">
+    tools:context=".view.LibraryDetailsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

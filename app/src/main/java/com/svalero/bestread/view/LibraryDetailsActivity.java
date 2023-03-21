@@ -1,4 +1,4 @@
-package com.svalero.bestread;
+package com.svalero.bestread.view;
 
 import static com.svalero.bestread.db.Constants.DATABASE_NAME;
 
@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.svalero.bestread.R;
 import com.svalero.bestread.db.AppDatabase;
 import com.svalero.bestread.domain.Library;
 

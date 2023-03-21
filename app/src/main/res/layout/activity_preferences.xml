@@ -6,7 +6,7 @@
     android:theme="@style/Theme.BestRead"
 
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".view.BestReadView"
     android:baselineAligned="false">
 
     <androidx.fragment.app.FragmentContainerView
@@ -16,7 +16,7 @@
         android:layout_weight="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        class="com.svalero.bestread.PreferencesFragment"
+        class="com.svalero.bestread.view.PreferencesFragment"
         tools:ignore="MissingConstraints"
         tools:layout="@layout/activity_preferences">
 

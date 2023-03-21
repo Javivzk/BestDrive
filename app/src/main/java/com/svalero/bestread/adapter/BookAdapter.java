@@ -14,7 +14,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
-import com.svalero.bestread.BookDetailsActivity;
+import com.svalero.bestread.view.BookDetailsActivity;
 import com.svalero.bestread.R;
 import com.svalero.bestread.db.AppDatabase;
 import com.svalero.bestread.domain.Book;

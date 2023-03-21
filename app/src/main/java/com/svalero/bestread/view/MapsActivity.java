@@ -1,4 +1,4 @@
-package com.svalero.bestread;
+package com.svalero.bestread.view;
 
 import static com.svalero.bestread.db.Constants.DATABASE_NAME;
 
@@ -19,6 +19,7 @@ import com.mapbox.maps.plugin.annotation.AnnotationPluginImplKt;
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManager;
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManagerKt;
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions;
+import com.svalero.bestread.R;
 import com.svalero.bestread.db.AppDatabase;
 import com.svalero.bestread.domain.Library;
 

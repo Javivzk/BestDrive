@@ -24,41 +24,41 @@
         android:theme="@style/Theme.BestRead"
         tools:targetApi="31">
         <activity
-            android:name=".RegisterUserActivity"
+            android:name=".view.RegisterUserActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".view.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".CameraActivity"
+            android:name=".view.CameraActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ModifyLibraryActivity"
+            android:name=".view.ModifyLibraryActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".LibraryListActivity"
+            android:name=".view.LibraryListView"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".view.BestReadView"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".SplashActivity"
+            android:name=".view.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
@@ -72,21 +72,21 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".MapsActivity"
+            android:name=".view.MapsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".LibraryDetailsActivity"
+            android:name=".view.LibraryDetailsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".PreferencesActivity"
+            android:name=".view.PreferencesActivity"
             android:exported="true"
             android:configChanges="uiMode" >
             <meta-data
@@ -94,35 +94,35 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".RegisterLibraryActivity"
+            android:name=".view.RegisterLibraryActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".RegisterBookActivity"
+            android:name=".view.RegisterBookActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".BookDetailsActivity"
+            android:name=".view.BookDetailsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".BookListActivity"
+            android:name=".view.BookListView"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ViewProfileActivity"
+            android:name=".view.ViewProfileActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -130,7 +130,7 @@
         </activity>
 
         <activity
-            android:name=".ModifyUserActivity"
+            android:name=".view.ModifyUserActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

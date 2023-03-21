@@ -1,4 +1,4 @@
-package com.svalero.bestread;
+package com.svalero.bestread.view;
 
 import static com.svalero.bestread.db.Constants.DATABASE_NAME;
 
@@ -25,6 +25,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.room.Room;
 
+import com.svalero.bestread.R;
 import com.svalero.bestread.db.AppDatabase;
 import com.svalero.bestread.domain.User;
 
@@ -119,7 +120,7 @@ public class ViewProfileActivity extends AppCompatActivity {
                     db.userDao().delete(user);
                     LoginActivity.currentUser = "";
 
-                    Intent intent = new Intent(this, MainActivity.class);
+                    Intent intent = new Intent(this, BestReadView.class);
                     startActivity(intent);
                 })
                 .setNegativeButton(R.string.no, (dialog, id) -> dialog.dismiss());
