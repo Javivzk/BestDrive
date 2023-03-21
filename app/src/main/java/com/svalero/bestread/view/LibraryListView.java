@@ -14,22 +14,36 @@ import androidx.room.Room;
 
 import com.svalero.bestread.R;
 import com.svalero.bestread.adapter.LibraryAdapter;
+import com.svalero.bestread.contract.LibraryListContract;
 import com.svalero.bestread.db.AppDatabase;
+import com.svalero.bestread.domain.Book;
 import com.svalero.bestread.domain.Library;
+import com.svalero.bestread.presenter.BookListPresenter;
+import com.svalero.bestread.presenter.LibraryListPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LibraryListActivity extends AppCompatActivity  {
+public class LibraryListView extends AppCompatActivity implements LibraryListContract.View  {
 
     private List<Library> libraryList;
     private LibraryAdapter adapter;
+
+    private LibraryListPresenter presenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library_list);
 
+        presenter = new LibraryListPresenter(this);
+
+        initializeRecyclerView();
+
+    }
+
+    private void initializeRecyclerView() {
         libraryList = new ArrayList<>();
 
         RecyclerView recyclerView = findViewById(R.id.library_list);
@@ -45,11 +59,7 @@ public class LibraryListActivity extends AppCompatActivity  {
     protected void onResume() {
         super.onResume();
 
-        final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
-                .allowMainThreadQueries().build();
-        libraryList.clear();
-        libraryList.addAll(db.libraryDao().getAll());
-        adapter.notifyDataSetChanged();
+        presenter.loadAllLibraries();
     }
 
     @Override
@@ -75,5 +85,18 @@ public class LibraryListActivity extends AppCompatActivity  {
             startActivity(intent);
         }
         return false;
+    }
+
+    @Override
+    public void showLibraries(List<Library> libraries) {
+        libraryList.clear();
+        libraryList.addAll(libraries);
+        adapter.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void showMessage(String message) {
+
     }
 }

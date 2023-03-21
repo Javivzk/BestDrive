@@ -53,7 +53,7 @@ public class BestReadView extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
 
         } else if (view.getId() == R.id.viewLibraryButton) {
-            Intent intent = new Intent(this, LibraryListActivity.class);
+            Intent intent = new Intent(this, LibraryListView.class);
             startActivity(intent);
         } else if (view.getId() == R.id.viewBookButton) {
             Intent intent = new Intent(this, BookListView.class);
