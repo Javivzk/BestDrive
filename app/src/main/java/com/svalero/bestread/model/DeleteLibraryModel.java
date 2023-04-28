@@ -4,36 +4,31 @@ import android.database.sqlite.SQLiteConstraintException;
 
 import com.svalero.bestread.api.BestReadApi;
 import com.svalero.bestread.api.BestReadApiInterface;
-import com.svalero.bestread.contract.RegisterBookContract;
-import com.svalero.bestread.domain.Book;
+import com.svalero.bestread.contract.DeleteLibraryContract;
 import com.svalero.bestread.domain.Library;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RegisterBookModel implements RegisterBookContract.Model {
-
+public class DeleteLibraryModel implements DeleteLibraryContract.Model {
 
     @Override
-    public void registerBook(Book book, RegisterBookContract.Model.OnRegisterBookListener listener) {
+    public void deleteLibrary(long libraryId, OnDeleteLibraryListener listener) {
         try {
             BestReadApiInterface bestReadApi = BestReadApi.buildInstance();
-            Call<Book> callBooks = bestReadApi.addBook(book);
-            callBooks.enqueue(new Callback<Book>() {
+            Call<Void> callLibraries = bestReadApi.deleteLibrary(libraryId);
+            callLibraries.enqueue(new Callback<Void>() {
                 @Override
-                public void onResponse(Call<Book> call, Response<Book> response) {
-                    Book book = response.body();
-                    listener.onRegisterBookSuccess(book);
-
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    listener.onDeleteSuccess();
                 }
 
                 @Override
-                public void onFailure(Call<Book> call, Throwable t) {
+                public void onFailure(Call<Void> call, Throwable t) {
                     t.printStackTrace();
                     String message = "Error invocando a la operacion";
-                    listener.onRegisterBookError(message);
-
+                    listener.onDeleteError(message);
                 }
             });
         }catch (SQLiteConstraintException sce) {

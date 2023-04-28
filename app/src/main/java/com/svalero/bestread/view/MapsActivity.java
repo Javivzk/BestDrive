@@ -1,12 +1,10 @@
 package com.svalero.bestread.view;
 
-import static com.svalero.bestread.db.Constants.DATABASE_NAME;
 
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
 import com.google.android.gms.location.LocationServices;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -20,7 +18,6 @@ import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManager;
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManagerKt;
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions;
 import com.svalero.bestread.R;
-import com.svalero.bestread.db.AppDatabase;
 import com.svalero.bestread.domain.Library;
 
 
@@ -42,10 +39,10 @@ public class MapsActivity extends AppCompatActivity {
         mapView = findViewById(R.id.mapView);
         initializePointManager();
 
-        final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
-                .allowMainThreadQueries().build();
-        List<Library> notices = db.libraryDao().getAll();
-        addNoticesToMap(notices);
+//        final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
+//                .allowMainThreadQueries().build();
+//        List<Library> notices = db.libraryDao().getAll();
+//        addNoticesToMap(notices);
 
     }
 

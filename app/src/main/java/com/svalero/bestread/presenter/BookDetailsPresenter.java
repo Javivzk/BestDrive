@@ -1,13 +1,10 @@
 package com.svalero.bestread.presenter;
 
 import com.svalero.bestread.contract.BookDetailsContract;
-import com.svalero.bestread.contract.LibraryDetailsContract;
 import com.svalero.bestread.domain.Book;
 import com.svalero.bestread.domain.Library;
 import com.svalero.bestread.model.BookDetailsModel;
-import com.svalero.bestread.model.LibraryDetailsModel;
 import com.svalero.bestread.view.BookDetailsView;
-import com.svalero.bestread.view.LibraryDetailsView;
 
 public class BookDetailsPresenter implements BookDetailsContract.Presenter {
 

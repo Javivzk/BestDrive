@@ -43,6 +43,7 @@
     <string name="invalid_username">Nombre de usuario no valido</string>
     <string name="invalid_password">La contraseña debe de tener mas de 5 caracteres</string>
     <string name="login_failed">"Inicio de sesion fallido"</string>
+    <string name="title_Id">Id</string>
     <string name="username">"Nombre de Usuario"</string>
     <string name="loginForgotten">Forgotten Password?</string>
     <string name="loginButton">Iniciar Sesion</string>
@@ -83,12 +84,12 @@
     <string name="register_book">Registrar libro</string>
     <string name="view_books">Ver Libros</string>
     <string name="city">Ciudad</string>
-
-
-
-
-
-
+    <string name="code">Codigo</string>
+    <string name="year">Año</string>
+    <string name="genre">Genero</string>
+    <string name="pages">Paginas</string>
+    <string name="price">Precio</string>
+    <string name="hasStock">Tiene Stock</string>
 
 
 </resources>

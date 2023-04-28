@@ -1,23 +1,16 @@
 package com.svalero.bestread.view;
 
-import static com.svalero.bestread.db.Constants.DATABASE_NAME;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
-
-import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.svalero.bestread.R;
-import com.svalero.bestread.contract.RegisterBookContract;
 import com.svalero.bestread.contract.RegisterUserContract;
-import com.svalero.bestread.db.AppDatabase;
 import com.svalero.bestread.domain.User;
-import com.svalero.bestread.presenter.RegisterBookPresenter;
 import com.svalero.bestread.presenter.RegisterUserPresenter;
 
 public class RegisterUserView extends AppCompatActivity implements RegisterUserContract.View{

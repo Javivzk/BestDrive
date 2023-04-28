@@ -1,19 +1,23 @@
 package com.svalero.bestread.contract;
 
 import com.svalero.bestread.domain.Book;
+import com.svalero.bestread.domain.Library;
 
 import java.util.List;
 
 public interface BookListContract {
 
     interface Model {
-        List<Book> loadAllBooks();
-        Book getByTitle(String title);
+        interface OnLoadBooksListener {
+            void onLoadBooksSuccess(List<Book>books);
+            void onLoadBooksError(String message);
+        }
+        void loadAllBooks(OnLoadBooksListener listener);
+        Book loadBookByTitle(String title);
         List<Book> getAll();
         Book getById(long id);
-        void deleteByTitle(String title);
         void insert(Book book);
-        void delete(Book book);
+        boolean deleteBook(String title);
         void update(Book book);
 
 

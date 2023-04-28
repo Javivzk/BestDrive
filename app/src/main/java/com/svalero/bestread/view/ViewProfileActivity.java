@@ -1,7 +1,5 @@
 package com.svalero.bestread.view;
 
-import static com.svalero.bestread.db.Constants.DATABASE_NAME;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -19,15 +17,11 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.room.Room;
 
 import com.svalero.bestread.R;
-import com.svalero.bestread.db.AppDatabase;
-import com.svalero.bestread.domain.User;
 
 public class ViewProfileActivity extends AppCompatActivity {
 
@@ -53,9 +47,9 @@ public class ViewProfileActivity extends AppCompatActivity {
                     checkExternalStoragePermissions();
                 }
                 camaraLauncher.launch(new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI));
-                if(transPathImg != null) {
-                    updateImg(transPathImg);
-                }
+//                if(transPathImg != null) {
+//                    updateImg(transPathImg);
+//                }
             }
         });
 
@@ -66,14 +60,14 @@ public class ViewProfileActivity extends AppCompatActivity {
         TextView tv_profileEmail = findViewById(R.id.tv_profileEmail);
         TextView tv_profileLastName = findViewById(R.id.tv_profileLastName);
 
-        final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
-                .allowMainThreadQueries().build();
-        User user = db.userDao().getByUsername(LoginActivity.currentUser);
+//        final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
+//                .allowMainThreadQueries().build();
+//        User user = db.userDao().getByUsername(LoginActivity.currentUser);
 
-        tv_profileUserName.setText(user.getUserName());
-        tv_profileName.setText(user.getName());
-        tv_profileEmail.setText(user.getEmail());
-        tv_profileLastName.setText(user.getLastName());
+//        tv_profileUserName.setText(user.getUserName());
+//        tv_profileName.setText(user.getName());
+//        tv_profileEmail.setText(user.getEmail());
+//        tv_profileLastName.setText(user.getLastName());
     }
 
     @Override
@@ -86,14 +80,14 @@ public class ViewProfileActivity extends AppCompatActivity {
         TextView tv_profileLastName = findViewById(R.id.tv_profileLastName);
 
 
-        final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
-                .allowMainThreadQueries().build();
-        User user = db.userDao().getByUsername(LoginActivity.currentUser);
+//        final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
+//                .allowMainThreadQueries().build();
+//        User user = db.userDao().getByUsername(LoginActivity.currentUser);
 
-        tv_profileUserName.setText(user.getUserName());
-        tv_profileName.setText(user.getName());
-        tv_profileEmail.setText(user.getEmail());
-        tv_profileLastName.setText(user.getLastName());
+//        tv_profileUserName.setText(user.getUserName());
+//        tv_profileName.setText(user.getName());
+//        tv_profileEmail.setText(user.getEmail());
+//        tv_profileLastName.setText(user.getLastName());
 
     }
 
@@ -102,32 +96,32 @@ public class ViewProfileActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void updateImg(String path) {
-        final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
-                .allowMainThreadQueries().build();
-        db.userDao().updateImgUser(LoginActivity.currentUser, path);
-    }
+//    public void updateImg(String path) {
+//        final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
+//                .allowMainThreadQueries().build();
+//        db.userDao().updateImgUser(LoginActivity.currentUser, path);
+//    }
 
-    public void deleteUser(View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(R.string.are_you_sure_message)
-                .setTitle(R.string.remove_user_message)
-                .setPositiveButton(R.string.yes, (dialog, id) -> {
-                    final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
-                            .allowMainThreadQueries().build();
-                    User user = db.userDao().getByUsername(LoginActivity.currentUser);
-
-                    db.userDao().delete(user);
-                    LoginActivity.currentUser = "";
-
-                    Intent intent = new Intent(this, BestReadView.class);
-                    startActivity(intent);
-                })
-                .setNegativeButton(R.string.no, (dialog, id) -> dialog.dismiss());
-        AlertDialog dialog = builder.create();
-        dialog.show();
-
-    }
+//    public void deleteUser(View view) {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setMessage(R.string.are_you_sure_message)
+//                .setTitle(R.string.remove_user_message)
+//                .setPositiveButton(R.string.yes, (dialog, id) -> {
+//                    final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
+//                            .allowMainThreadQueries().build();
+//                    User user = db.userDao().getByUsername(LoginActivity.currentUser);
+//
+//                    db.userDao().delete(user);
+//                    LoginActivity.currentUser = "";
+//
+//                    Intent intent = new Intent(this, BestReadView.class);
+//                    startActivity(intent);
+//                })
+//                .setNegativeButton(R.string.no, (dialog, id) -> dialog.dismiss());
+//        AlertDialog dialog = builder.create();
+//        dialog.show();
+//
+//    }
 
     ActivityResultLauncher<Intent> camaraLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {

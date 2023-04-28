@@ -44,6 +44,14 @@
         tools:layout_editor_absoluteX="1dp">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/code"
+            android:inputType="textPersonName" />
+
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_text_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,11 +68,51 @@
             android:inputType="textPersonName" />
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_year"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/year"
+            android:inputType="textPersonName" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_genre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/genre"
+            android:inputType="textPersonName" />
+
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_text_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/description"
+            android:inputType="textPersonName" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_pages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/pages"
+            android:inputType="textPersonName" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/price"
+            android:inputType="textPersonName" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_hasStock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/hasStock"
             android:inputType="textPersonName" />
 
     </LinearLayout>

@@ -73,6 +73,7 @@
     <string name="title_email_mssg">Email</string>
     <string name="update_user">User updated successfully</string>
     <string name="title_lastname_mssg">Last Name</string>
+    <string name="title_Id">Id</string>
     <string name="title_phone_mssg">Phone</string>
     <string name="my_profile_mssg">My profile</string>
     <string name="book_modified_message">Book modified</string>
@@ -82,6 +83,12 @@
     <string name="register_book">Register book</string>
     <string name="view_books">View Books</string>
     <string name="city">City</string>
+    <string name="code">Code</string>
+    <string name="year">Year</string>
+    <string name="genre">Genre</string>
+    <string name="pages">Pages</string>
+    <string name="price">Price</string>
+    <string name="hasStock">Has Stock</string>
 
 
 </resources>

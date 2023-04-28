@@ -5,11 +5,10 @@ import com.svalero.bestread.contract.RegisterLibraryContract;
 import com.svalero.bestread.domain.Book;
 import com.svalero.bestread.domain.Library;
 import com.svalero.bestread.model.RegisterBookModel;
-import com.svalero.bestread.model.RegisterLibraryModel;
 import com.svalero.bestread.view.RegisterBookView;
-import com.svalero.bestread.view.RegisterLibraryView;
 
-public class RegisterBookPresenter implements RegisterBookContract.Presenter {
+public class RegisterBookPresenter implements RegisterBookContract.Presenter,
+        RegisterBookContract.Model.OnRegisterBookListener {
 
     private RegisterBookModel model;
 
@@ -17,18 +16,22 @@ public class RegisterBookPresenter implements RegisterBookContract.Presenter {
 
     public RegisterBookPresenter(RegisterBookView view) {
         this.view = view;
-        model = new RegisterBookModel(view.getApplicationContext());
+        model = new RegisterBookModel();
 
     }
 
     @Override
     public void registerBook(Book book) {
-        boolean done = model.registerBook(book);
-        if (done) {
-            view.showMessage("Tarea registrada correctamente");
-            view.resetForm();
-        }else {
-            view.showError("Se ha producido un error al registrar la libreria. Comprueba que los datos son correctos");
-        }
+        model.registerBook(book, this);
+    }
+
+    @Override
+    public void onRegisterBookSuccess(Book book) {
+        view.showMessage("El libro " + book.getId() + " se ha registrado correctamente");
+    }
+
+    @Override
+    public void onRegisterBookError(String message) {
+        view.showError("Se ha producido un error al registrar el libro. Intentelo de nuevo");
     }
 }
