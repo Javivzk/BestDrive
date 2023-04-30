@@ -6,7 +6,8 @@ import com.svalero.bestread.domain.Library;
 import com.svalero.bestread.model.BookDetailsModel;
 import com.svalero.bestread.view.BookDetailsView;
 
-public class BookDetailsPresenter implements BookDetailsContract.Presenter {
+public class BookDetailsPresenter implements BookDetailsContract.Presenter,
+BookDetailsContract.Model.OnDetailBookListener{
 
     private BookDetailsModel model;
     private BookDetailsView view;
@@ -17,8 +18,22 @@ public class BookDetailsPresenter implements BookDetailsContract.Presenter {
     }
 
     @Override
-    public void loadBook(String title) {
-        Book book = model.getBook(title);
+    public void loadBook(long bookId) {
+        model.loadBook(this,bookId);
+    }
+
+    @Override
+    public void onDetailBookSuccess(Book book) {
         view.showBook(book);
+    }
+
+    @Override
+    public void onDetailBookError(String message) {
+        view.showMessage(message);
+    }
+
+    @Override
+    public void deleteBook(Book book) {
+
     }
 }

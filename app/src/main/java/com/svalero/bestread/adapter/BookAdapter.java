@@ -118,7 +118,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder>
         Book book = bookList.get(position);
 
         Intent intent = new Intent(context, BookDetailsView.class);
-        intent.putExtra("title", book.getTitle());
+        intent.putExtra("bookId", book.getId());
         context.startActivity(intent);
     }
 

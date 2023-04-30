@@ -17,6 +17,8 @@ import com.svalero.bestread.presenter.LibraryDetailsPresenter;
 public class LibraryDetailsView extends AppCompatActivity implements LibraryDetailsContract.View {
 
     private LibraryDetailsPresenter presenter;
+    long libraryId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,15 +27,15 @@ public class LibraryDetailsView extends AppCompatActivity implements LibraryDeta
         presenter = new LibraryDetailsPresenter(this);
 
         Intent intent = getIntent();
-        String name = intent.getStringExtra("name");
-        if (name == null)
+        libraryId = intent.getLongExtra("libraryId",0);
+        if (libraryId == 0)
             return;
 
         SharedPreferences preferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
         String username = preferences.getString("username" ,"");
         String password = preferences.getString("password", "");
 
-        presenter.loadLibrary(name);
+        presenter.loadLibrary(libraryId);
     }
 
 //    public void modifyLibrary(View view) {
@@ -76,5 +78,11 @@ public class LibraryDetailsView extends AppCompatActivity implements LibraryDeta
         etName.setText(library.getName());
         etDescription.setText(library.getDescription());
         etOwner.setText(library.getCity());
+        presenter.loadLibrary(libraryId);
+    }
+
+    @Override
+    public void showMessage(String message) {
+
     }
 }

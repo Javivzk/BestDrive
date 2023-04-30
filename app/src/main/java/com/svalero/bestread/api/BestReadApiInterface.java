@@ -3,6 +3,7 @@ package com.svalero.bestread.api;
 import com.svalero.bestread.domain.Book;
 import com.svalero.bestread.domain.JwtRequest;
 import com.svalero.bestread.domain.Library;
+import com.svalero.bestread.domain.User;
 
 import java.util.List;
 
@@ -42,5 +43,19 @@ public interface BestReadApiInterface {
 
     @POST("login")
     Call<Void> login(@Body JwtRequest jwtRequest);
+
+    @POST("users")
+    Call<User> addUser(@Body User user);
+    @DELETE("users/{user_id}")
+    Call<Void> deleteUser(@Path("user_id") long id);
+
+    @DELETE("favourites/{favourite_id}")
+    Call<Void> deleteFavourite(@Path("favourite_id") long id);
+
+    @GET("users/{userId}")
+    Call<User> getUserById(@Path("userId") long userId);
+
+    @GET("user")
+    Call<User> getUserLogin(@Query("username") String username, @Query("password") String password);
 
 }

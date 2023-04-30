@@ -49,35 +49,12 @@ public class Book {
     private float price;
 
     @ColumnInfo
-    @NonNull
     private boolean hasStock;
-
-
-    @ManyToOne
-    @JoinColumn(name = "rent_id")
-    @JsonBackReference(value = "book_rents")
-    private Rent rent;
-
-    @ToString.Exclude
-    @ManyToMany
-    @JoinTable(name = "books_stock",
-            joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "stock_id"))
-    private List<Stock> stocks;
-
-    @ToString.Exclude
-    @ManyToMany
-    @JoinTable(name = "books_notices",
-            joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "notice_id"))
-    private List<Notice> noticesByBooks;
-
-
 
     public Book() {
     }
 
-    public Book(String code,@NonNull String title, String author, String year, String genre, String description, int pages, float price, boolean hasStock) {
+    public Book(String code, String title, String author, String year, String genre, String description, int pages, float price, boolean hasStock) {
         this.code = code;
         this.title = title;
         this.author = author;

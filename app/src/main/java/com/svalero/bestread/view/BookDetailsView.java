@@ -7,6 +7,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.svalero.bestread.R;
+import com.svalero.bestread.adapter.BookAdapter;
 import com.svalero.bestread.contract.BookDetailsContract;
 import com.svalero.bestread.domain.Book;
 import com.svalero.bestread.presenter.BookDetailsPresenter;
@@ -14,6 +15,8 @@ import com.svalero.bestread.presenter.BookDetailsPresenter;
 public class BookDetailsView extends AppCompatActivity implements BookDetailsContract.View {
 
     private BookDetailsPresenter presenter;
+    private BookAdapter bookAdapter;
+    long bookId;
 
 
     @Override
@@ -24,11 +27,11 @@ public class BookDetailsView extends AppCompatActivity implements BookDetailsCon
         presenter = new BookDetailsPresenter(this);
 
         Intent intent = getIntent();
-        String title = intent.getStringExtra("title");
-        if (title == null)
+        bookId = intent.getLongExtra("bookId", 0);
+        if (bookId == 0)
             return;
 
-        presenter.loadBook(title);
+        presenter.loadBook(bookId);
     }
 
 
@@ -62,6 +65,7 @@ public class BookDetailsView extends AppCompatActivity implements BookDetailsCon
 //        }
 //    }
 
+
     @Override
     public void showBook(Book book) {
         EditText etCode = findViewById(R.id.et_book_code);
@@ -83,6 +87,10 @@ public class BookDetailsView extends AppCompatActivity implements BookDetailsCon
         etPages.setText(book.getPages());
         etPrice.setText(String.valueOf(book.getPrice()));
         etHasStock.setText(String.valueOf(book.isHasStock()));
+    }
+
+    @Override
+    public void showMessage(String message) {
 
     }
 }
