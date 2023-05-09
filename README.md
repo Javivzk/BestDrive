@@ -7,6 +7,16 @@ La app está enfocada a ser una aplicacion para registrar avisos de tipo obras, 
 Los avisos se registran en el mapa, podemos eliminarlos y modificarlos.
 Tambien he añadido la funcionalidad de poder hacer fotos con la camara, aunque no he conseguido guardarlas.
 El primer boton que seria para Navegacion aun no he conseguido implementarlo, mi intencion era hacer una especie de Google Maps con GPS.
+## 2ª Evaluacion
+## Requisitos (1 pto cada uno, obligatorios)
+- [x] La aplicación deberá consumir la API diseñada y desarrollada en la asignatura de Acceso a Datos. Al menos 2 operaciones de cada uno de estos métodos: POST, GET, PUT y DELETE. Al menos una de ellas permitirá listar información
+- [x] La comunicación con la API se llevará a cabo utilizando Retrofit
+- [x] Se hará uso de mapas para mostrar información (si es necesario, habrá que añadir información geográfica a alguno de los recursos de la API diseñada)
+- [x] La aplicación se diseñará utilizando el patrón MVP (Model View Presenter)
+- [ ] El usuario podrá almacenar como “favorito” aquella información de la API que le resulte de interés
+
+
+## 1ª Evaluacion
 
 ## Requisitos básicos
 - [x] La aplicación contará con, al menos, 7 Activities, utilizando controles ImageView, TextView, Button, CheckBox y RecyclerView para recoger y presentar información en pantalla y se hará, como mínimo, en dos idiomas
