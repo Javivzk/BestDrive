@@ -24,11 +24,12 @@ public class LibraryDetailsModel implements LibraryDetailsContract.Model {
         callLibrary.enqueue(new Callback<Library>() {
             @Override
             public void onResponse(Call<Library> call, Response<Library> response) {
-                Log.d("library", "LLamada desde model ok");
-
-                Library library = response.body();
-                listener.onDetailLibrarySuccess(library);
-
+                if (response.isSuccessful() && response.body() != null) {
+                    Library library = response.body();
+                    listener.onDetailLibrarySuccess(library);
+                } else {
+                    listener.onDetailLibraryError("Error al recuperar la biblioteca");
+                }
             }
 
             @Override

@@ -4,19 +4,29 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.svalero.bestread.R;
 import com.svalero.bestread.contract.LibraryDetailsContract;
+import com.svalero.bestread.contract.ModifyBookContract;
+import com.svalero.bestread.contract.ModifyLibraryContract;
+import com.svalero.bestread.domain.Book;
 import com.svalero.bestread.domain.Library;
 import com.svalero.bestread.presenter.LibraryDetailsPresenter;
+import com.svalero.bestread.presenter.ModifyBookPresenter;
+import com.svalero.bestread.presenter.ModifyLibraryPresenter;
 
 
-public class LibraryDetailsView extends AppCompatActivity implements LibraryDetailsContract.View {
+public class LibraryDetailsView extends AppCompatActivity implements LibraryDetailsContract.View,ModifyLibraryContract.View {
 
     private LibraryDetailsPresenter presenter;
+    private ModifyLibraryContract.Presenter modifyPresenter;
+
     long libraryId;
 
     @Override
@@ -25,6 +35,8 @@ public class LibraryDetailsView extends AppCompatActivity implements LibraryDeta
         setContentView(R.layout.activity_library_details);
 
         presenter = new LibraryDetailsPresenter(this);
+        modifyPresenter = new ModifyLibraryPresenter(this);
+
 
         Intent intent = getIntent();
         libraryId = intent.getLongExtra("libraryId",0);
@@ -69,6 +81,30 @@ public class LibraryDetailsView extends AppCompatActivity implements LibraryDeta
 //
 //    }
 
+    public void modifyLibrary(View view) {
+
+        Intent intent = getIntent();
+
+        libraryId = intent.getLongExtra("libraryId",0);
+        if (libraryId == 0) {
+            return;
+        }
+
+        EditText nameField = findViewById(R.id.et_library_name);
+        EditText descriptionField = findViewById(R.id.et_library_description);
+        EditText cityField = findViewById(R.id.et_library_city);
+
+        Library updatedLibrary = new Library();
+
+        updatedLibrary.setName(nameField.getText().toString());
+        updatedLibrary.setDescription(descriptionField.getText().toString());
+        updatedLibrary.setCity(cityField.getText().toString());
+
+
+        modifyPresenter.modifyLibrary(updatedLibrary, libraryId);
+    }
+
+
     @Override
     public void showLibrary(Library library) {
         EditText etName = findViewById(R.id.et_library_name);
@@ -78,11 +114,15 @@ public class LibraryDetailsView extends AppCompatActivity implements LibraryDeta
         etName.setText(library.getName());
         etDescription.setText(library.getDescription());
         etOwner.setText(library.getCity());
-        presenter.loadLibrary(libraryId);
+    }
+
+    @Override
+    public void showError(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void showMessage(String message) {
-
+        // No es necesario hacer nada aquí
     }
 }

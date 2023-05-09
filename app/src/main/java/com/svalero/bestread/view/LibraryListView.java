@@ -71,7 +71,7 @@ public class LibraryListView extends AppCompatActivity implements LibraryListCon
             startActivity(intent);
             return true;
         }else if (item.getItemId() == R.id.view_map) {
-            Intent intent = new Intent(this, MapsActivity.class);
+            Intent intent = new Intent(this, LibraryMapView.class);
             startActivity(intent);
         }else if (item.getItemId() == R.id.view_settings) {
             Intent intent = new Intent(this, PreferencesActivity.class);

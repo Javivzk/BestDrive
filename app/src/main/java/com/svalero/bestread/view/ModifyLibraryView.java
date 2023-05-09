@@ -18,7 +18,7 @@ import com.mapbox.maps.plugin.gestures.GesturesPlugin;
 import com.mapbox.maps.plugin.gestures.GesturesUtils;
 import com.svalero.bestread.R;
 
-public class ModifyLibraryActivity extends AppCompatActivity {
+public class ModifyLibraryView extends AppCompatActivity {
 
     private MapView libraryMap;
     private Point point;

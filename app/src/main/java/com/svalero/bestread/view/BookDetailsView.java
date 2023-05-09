@@ -1,23 +1,29 @@
 package com.svalero.bestread.view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.svalero.bestread.R;
-import com.svalero.bestread.adapter.BookAdapter;
 import com.svalero.bestread.contract.BookDetailsContract;
+import com.svalero.bestread.contract.ModifyBookContract;
 import com.svalero.bestread.domain.Book;
 import com.svalero.bestread.presenter.BookDetailsPresenter;
+import com.svalero.bestread.presenter.ModifyBookPresenter;
 
-public class BookDetailsView extends AppCompatActivity implements BookDetailsContract.View {
+public class BookDetailsView extends AppCompatActivity implements BookDetailsContract.View, ModifyBookContract.View {
 
-    private BookDetailsPresenter presenter;
-    private BookAdapter bookAdapter;
-    long bookId;
-
+    private BookDetailsContract.Presenter presenter;
+    private ModifyBookContract.Presenter modifyPresenter;
+    private long bookId;
+    private Book loadedBook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,45 +31,60 @@ public class BookDetailsView extends AppCompatActivity implements BookDetailsCon
         setContentView(R.layout.activity_book_details);
 
         presenter = new BookDetailsPresenter(this);
+        modifyPresenter = new ModifyBookPresenter(this);
+
+
+        SharedPreferences preferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
+        String username = preferences.getString("username","");
+        String password = preferences.getString("password", "");
 
         Intent intent = getIntent();
         bookId = intent.getLongExtra("bookId", 0);
-        if (bookId == 0)
-            return;
+
+        Toast.makeText(this, "Received bookId: " + bookId, Toast.LENGTH_SHORT).show();
+
+        Log.d("BookDetailsView", "Book id: " + bookId);
 
         presenter.loadBook(bookId);
     }
 
 
-//    public void modifyBook(View view) {
-//        Intent intent = getIntent();
-//
-//        String title = intent.getStringExtra("title");
-//        if (title == null)
-//            return;
-//
-//        final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
-//                .allowMainThreadQueries().build();
-//
-//        Book newBook = db.bookDao().getByTitle(title);
-//
-//        EditText authorField = findViewById(R.id.et_book_author);
-//        EditText descriptionField = findViewById(R.id.et_book_description);
-//
-//        newBook.setAuthor(authorField.getText().toString());
-//        newBook.setDescription(descriptionField.getText().toString());
-//
-//
-//        try {
-//            db.bookDao().getByTitle(newBook.getTitle());
-//            db.bookDao().update(newBook);
-//            Toast.makeText(this, R.string.book_modified_message, Toast.LENGTH_LONG).show();
-//            onBackPressed();
-//        } catch (SQLiteConstraintException sce) {
-//            Toast.makeText(this, "El libro no existe", Toast.LENGTH_LONG).show();
-//
-//        }
-//    }
+    public void modifyBook(View view) {
+        Log.d("BookDetailsView", "modifyBook clicked");
+
+        Intent intent = getIntent();
+
+        bookId = intent.getLongExtra("bookId",0);
+        if (bookId == 0) {
+            Log.d("BookDetailsView", "bookId is 0");
+            return;
+        }
+
+
+
+        EditText codeField = findViewById(R.id.et_book_code);
+        EditText yearField = findViewById(R.id.et_book_year);
+        EditText genreField = findViewById(R.id.et_book_genre);
+        EditText authorField = findViewById(R.id.et_book_author);
+        EditText descriptionField = findViewById(R.id.et_book_description);
+        EditText titleField = findViewById(R.id.et_book_title);
+
+        Book updatedBook = new Book();
+
+        updatedBook.setCode(codeField.getText().toString());
+        updatedBook.setGenre(genreField.getText().toString());
+        updatedBook.setYear(yearField.getText().toString());
+        updatedBook.setAuthor(authorField.getText().toString());
+        updatedBook.setDescription(descriptionField.getText().toString());
+        updatedBook.setTitle(titleField.getText().toString());
+
+
+
+        Log.d("BookDetailsView", "updatedBook: " + updatedBook);
+        Log.d("BookDetailsView", "loadedBook: " + loadedBook);
+
+        modifyPresenter.modifyBook(updatedBook, bookId);
+    }
 
 
     @Override
@@ -74,9 +95,6 @@ public class BookDetailsView extends AppCompatActivity implements BookDetailsCon
         EditText etYear = findViewById(R.id.et_book_year);
         EditText etGenre = findViewById(R.id.et_book_genre);
         EditText etDescription = findViewById(R.id.et_book_description);
-        EditText etPages = findViewById(R.id.et_book_pages);
-        EditText etPrice = findViewById(R.id.et_book_price);
-        EditText etHasStock = findViewById(R.id.et_book_hasStock);
 
         etCode.setText(book.getCode());
         etTitle.setText(book.getTitle());
@@ -84,13 +102,18 @@ public class BookDetailsView extends AppCompatActivity implements BookDetailsCon
         etYear.setText(book.getYear());
         etGenre.setText(book.getGenre());
         etDescription.setText(book.getDescription());
-        etPages.setText(book.getPages());
-        etPrice.setText(String.valueOf(book.getPrice()));
-        etHasStock.setText(String.valueOf(book.isHasStock()));
+
+        loadedBook = book;
+    }
+
+    @Override
+    public void showError(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void showMessage(String message) {
-
+        // No es necesario hacer nada aquí
     }
+
 }

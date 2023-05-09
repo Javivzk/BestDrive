@@ -10,7 +10,7 @@ import com.svalero.bestread.view.BookDetailsView;
 import com.svalero.bestread.view.LibraryDetailsView;
 
 public class LibraryDetailsPresenter implements LibraryDetailsContract.Presenter,
-        LibraryDetailsContract.Model.OnDetailLibraryListener{
+        LibraryDetailsContract.Model.OnDetailLibraryListener {
 
     private LibraryDetailsModel model;
     private LibraryDetailsView view;
@@ -22,20 +22,22 @@ public class LibraryDetailsPresenter implements LibraryDetailsContract.Presenter
 
     @Override
     public void loadLibrary(long libraryId) {
-        model.loadLibrary(this,libraryId);
+        model.loadLibrary(this, libraryId);
     }
 
-    @Override
-    public void deleteLibrary(Library library) {
-    }
 
     @Override
     public void onDetailLibrarySuccess(Library library) {
-        view.showLibrary(library);
+        if (view != null) {
+            view.showLibrary(library);
+        }
     }
+
 
     @Override
     public void onDetailLibraryError(String message) {
-        view.showMessage(message);
+        if (view != null) {
+            view.showMessage(message);
+        }
     }
 }

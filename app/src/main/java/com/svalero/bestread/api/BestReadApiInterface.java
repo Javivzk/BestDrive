@@ -12,6 +12,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -29,6 +30,8 @@ public interface BestReadApiInterface {
     @DELETE("library/{libraryId}")
     Call<Void> deleteLibrary(@Path("libraryId") long libraryId);
 
+    @PUT("library/{libraryId}")
+    Call<Library> modifyLibrary(@Path("libraryId") long libraryId ,@Body Library updatedLibrary);
     @GET("books")
     Call<List<Book>> getBooks();
 
@@ -37,6 +40,9 @@ public interface BestReadApiInterface {
 
     @POST("books")
     Call<Book> addBook(@Body Book book);
+
+    @PUT("book/{bookId}")
+    Call<Book> modifyBook(@Path("bookId") long bookId ,@Body Book updatedBook);
 
     @DELETE("book/{bookId}")
     Call<Void> deleteBook(@Path("bookId") long bookId);
@@ -57,5 +63,6 @@ public interface BestReadApiInterface {
 
     @GET("user")
     Call<User> getUserLogin(@Query("username") String username, @Query("password") String password);
+
 
 }

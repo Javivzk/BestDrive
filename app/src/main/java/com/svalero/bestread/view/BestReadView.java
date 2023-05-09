@@ -40,16 +40,13 @@ public class BestReadView extends AppCompatActivity implements View.OnClickListe
         viewLibraryButton.setOnClickListener(this);
         Button viewBookButton = findViewById(R.id.viewBookButton);
         viewBookButton.setOnClickListener(this);
-        Button openCameraButton = findViewById(R.id.openCameraButton);
-        openCameraButton.setOnClickListener(this);
-
 
         Toast.makeText(this, R.string.remember_message,Toast.LENGTH_SHORT).show();
     }
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.viewMapButton) {
-        Intent intent = new Intent(this, MapsActivity.class);
+        Intent intent = new Intent(this, LibraryMapView.class);
         startActivity(intent);
 
         } else if (view.getId() == R.id.viewLibraryButton) {
@@ -57,9 +54,6 @@ public class BestReadView extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         } else if (view.getId() == R.id.viewBookButton) {
             Intent intent = new Intent(this, BookListView.class);
-            startActivity(intent);
-        }else if (view.getId() == R.id.openCameraButton){
-            Intent intent = new Intent(this, CameraActivity.class);
             startActivity(intent);
     }
     }
@@ -78,7 +72,7 @@ public class BestReadView extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
             return true;
         }else if (item.getItemId() == R.id.view_map) {
-            Intent intent = new Intent(this, MapsActivity.class);
+            Intent intent = new Intent(this, LibraryMapView.class);
             startActivity(intent);
         }else if (item.getItemId() == R.id.view_settings) {
             Intent intent = new Intent(this, PreferencesActivity.class);

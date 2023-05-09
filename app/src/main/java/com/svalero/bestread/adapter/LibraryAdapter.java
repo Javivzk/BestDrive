@@ -28,6 +28,8 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryH
     private Context context;
     private List<Library> libraryList;
     private View snackBarView;
+    private Intent intentFrom;
+
     private DeleteLibraryPresenter presenter;
 
     public Context getContext() {
@@ -37,6 +39,7 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryH
     public LibraryAdapter(Context context, List<Library> dataList) {
         this.context = context;
         this.libraryList = dataList;
+        this.intentFrom = intentFrom;
         presenter = new DeleteLibraryPresenter(this);
     }
 
@@ -115,9 +118,8 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryH
 
     private void seeDetails(int position) {
         Library library = libraryList.get(position);
-
         Intent intent = new Intent(context, LibraryDetailsView.class);
-        intent.putExtra("name", library.getName());
+        intent.putExtra("libraryId", library.getId());
         context.startActivity(intent);
     }
 

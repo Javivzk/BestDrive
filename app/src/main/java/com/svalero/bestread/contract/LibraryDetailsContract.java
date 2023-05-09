@@ -10,7 +10,7 @@ public interface LibraryDetailsContract {
             void onDetailLibrarySuccess(Library library);
             void onDetailLibraryError(String message);
         }
-        void loadLibrary(LibraryDetailsContract.Model.OnDetailLibraryListener listener, long libraryId);
+        void loadLibrary(OnDetailLibraryListener listener, long libraryId);
     }
 
     interface View {
@@ -20,7 +20,6 @@ public interface LibraryDetailsContract {
 
     interface Presenter {
         void loadLibrary(long libraryId);
-        void deleteLibrary(Library library);
 
     }
 }

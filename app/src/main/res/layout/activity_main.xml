@@ -48,13 +48,6 @@
             android:drawableLeft="@drawable/map_search_find_maps_10803"
             android:text="@string/view_map" />
 
-        <com.google.android.material.button.MaterialButton
-
-            android:id="@+id/openCameraButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/camera"
-            android:text="@string/open_camera" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

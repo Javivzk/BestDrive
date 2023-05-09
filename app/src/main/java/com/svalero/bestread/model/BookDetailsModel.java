@@ -16,34 +16,25 @@ import retrofit2.Response;
 
 public class BookDetailsModel implements BookDetailsContract.Model {
 
-    private Context context;
-
-    public BookDetailsModel(Context context) {
-        this.context = context;
-    }
-
-
     @Override
-    public void loadBook(OnDetailBookListener listener, long bookId) {
+    public void loadBook(BookDetailsContract.Model.OnDetailBookListener listener, long bookId) {
         BestReadApiInterface bestReadApiInterface = BestReadApi.buildInstance();
         Call<Book> callBook = bestReadApiInterface.getBook(bookId);
         callBook.enqueue(new Callback<Book>() {
             @Override
             public void onResponse(Call<Book> call, Response<Book> response) {
-                Log.d("book", "LLamada desde model ok");
-
-                Book book = response.body();
-                listener.onDetailBookSuccess(book);
-
+                if (response.isSuccessful() && response.body() != null) {
+                    Book book = response.body();
+                    listener.onDetailBookSuccess(book);
+                } else {
+                    listener.onDetailBookError("Error al recuperar el libro");
+                }
             }
 
             @Override
             public void onFailure(Call<Book> call, Throwable t) {
-                t.printStackTrace();
-                String message = "Error invocando a la operación";
-                listener.onDetailBookError(message);
+                listener.onDetailBookError(t.getMessage());
             }
         });
     }
-
 }

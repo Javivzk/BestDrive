@@ -66,6 +66,15 @@ public class Book {
         this.description = description;
     }
 
+    public Book(String title, String author, String description, String code, String year, String genre) {
+        this.code = code;
+        this.title = title;
+        this.author = author;
+        this.year = year;
+        this.genre = genre;
+        this.description = description;
+    }
+
     public int getPages() {
         return pages;
     }

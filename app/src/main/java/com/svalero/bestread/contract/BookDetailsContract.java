@@ -11,17 +11,22 @@ public interface BookDetailsContract {
             void onDetailBookSuccess(Book book);
             void onDetailBookError(String message);
         }
-        void loadBook(BookDetailsContract.Model.OnDetailBookListener listener, long bookId);
+        void loadBook(OnDetailBookListener listener, long bookId);
+
     }
 
     interface View {
         void showBook(Book book);
+        void showError(String message);
+
         void showMessage(String message);
     }
 
     interface Presenter {
         void loadBook(long bookId);
-        void deleteBook(Book book);
-
     }
+
+
+
+
 }

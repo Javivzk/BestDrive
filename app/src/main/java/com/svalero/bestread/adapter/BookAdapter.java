@@ -16,7 +16,6 @@ import com.google.android.material.snackbar.Snackbar;
 import com.svalero.bestread.R;
 import com.svalero.bestread.contract.DeleteBookContract;
 import com.svalero.bestread.domain.Book;
-import com.svalero.bestread.domain.Library;
 import com.svalero.bestread.presenter.DeleteBookPresenter;
 import com.svalero.bestread.view.BookDetailsView;
 
@@ -28,7 +27,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder>
     private Context context;
     private List<Book> bookList;
 
-    private DeleteBookPresenter presenter;
+    private Intent intentFrom;
+
+    private DeleteBookPresenter deleteBookPresenter;
+
+    private String token;
 
     private View snackBarView;
 
@@ -40,7 +43,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder>
     public BookAdapter(Context context, List<Book> dataList) {
         this.context = context;
         this.bookList = dataList;
-        presenter = new DeleteBookPresenter(this);
+        this.intentFrom = intentFrom;
+        this.token = token;
+        deleteBookPresenter = new DeleteBookPresenter(this);
 
     }
 
@@ -110,17 +115,20 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder>
             seeDetailsBookButton.setOnClickListener(v -> seeDetails(getAdapterPosition()));
             // Eliminar tarea
             deleteBookButton.setOnClickListener(v -> deleteBook(getAdapterPosition()));
+            //Modificar tarea
+
+
 
         }
     }
 
     private void seeDetails(int position) {
         Book book = bookList.get(position);
-
         Intent intent = new Intent(context, BookDetailsView.class);
         intent.putExtra("bookId", book.getId());
         context.startActivity(intent);
     }
+
 
     private void deleteBook(int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -128,7 +136,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder>
                 .setTitle(R.string.remove_book_message)
                 .setPositiveButton(R.string.yes, ((dialog, id) -> {
                     Book book = bookList.get(position);
-                    presenter.deleteBook(book.getId());
+                    deleteBookPresenter.deleteBook(book.getId());
 
                     bookList.remove(position);
                     notifyItemRemoved(position);
@@ -137,5 +145,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder>
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+
 
 }

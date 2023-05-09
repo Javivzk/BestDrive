@@ -6,8 +6,6 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.location.LocationServices;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mapbox.geojson.Point;
 import com.mapbox.maps.CameraOptions;
 import com.mapbox.maps.MapView;
@@ -18,17 +16,18 @@ import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManager;
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManagerKt;
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions;
 import com.svalero.bestread.R;
+import com.svalero.bestread.contract.LibraryListContract;
 import com.svalero.bestread.domain.Library;
+import com.svalero.bestread.presenter.LibraryMapPresenter;
 
 
 import java.util.List;
 
-public class MapsActivity extends AppCompatActivity {
+public class LibraryMapView extends AppCompatActivity implements LibraryListContract.View {
 
     private MapView mapView;
     private PointAnnotationManager pointAnnotationManager;
-    private FloatingActionButton btUbicacion;
-    private LocationServices servicioUbicacion;
+    private LibraryMapPresenter librariesMapPresenter;
 
 
     @Override
@@ -37,6 +36,8 @@ public class MapsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_maps);
 
         mapView = findViewById(R.id.mapView);
+        librariesMapPresenter = new LibraryMapPresenter(this);
+        librariesMapPresenter.loadAllLibraries();
         initializePointManager();
 
 //        final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, DATABASE_NAME)
@@ -46,14 +47,20 @@ public class MapsActivity extends AppCompatActivity {
 
     }
 
-    private void addNoticesToMap(List<Library> notices) {
-        for (Library notice : notices) {
-            Point point = Point.fromLngLat(notice.getLongitude(), notice.getLatitude());
-            addMarker(point, notice.getName());
+    @Override
+    public void showLibraries(List<Library> librariesList) {
+        for (Library library : librariesList) {
+            Point point = Point.fromLngLat(library.getLongitude(), library.getLatitude());
+            addMarker(point, library.getName());
         }
 
-        Library lastNotice = notices.get(notices.size() - 1);
-        setCameraPosition(Point.fromLngLat(lastNotice.getLongitude(), lastNotice.getLatitude()));
+        Library lastLibrary = librariesList.get(librariesList.size() - 1);
+        setCameraPosition(Point.fromLngLat(lastLibrary.getLongitude(), lastLibrary.getLatitude()));
+    }
+
+    @Override
+    public void showMessage(String message) {
+
     }
 
     private void initializePointManager() {
