@@ -1,6 +1,5 @@
 package com.svalero.bestread.contract;
 
-import com.svalero.bestread.domain.Book;
 import com.svalero.bestread.domain.Library;
 
 import java.util.List;
@@ -8,13 +7,16 @@ import java.util.List;
 public interface LibraryListContract {
 
     interface Model {
-        List<Library> loadAllLibraries();
-        Library getByName(String name);
+        interface OnLoadLibrariesListener {
+            void onLoadLibrariesSuccess(List<Library>libraries);
+            void onLoadLibrariesError(String message);
+        }
+        void loadAllLibraries(OnLoadLibrariesListener listener);
+        Library loadLibrariesByName(String name);
         List<Library> getAll();
         Library getById(long id);
-        void deleteByName(String name);
         void insert(Library library);
-        void delete(Library library);
+        boolean deleteLibrary(String name);
         void update(Library library);
 
 

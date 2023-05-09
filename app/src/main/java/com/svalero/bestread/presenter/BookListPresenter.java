@@ -2,6 +2,7 @@ package com.svalero.bestread.presenter;
 
 import com.svalero.bestread.contract.BestReadContract;
 import com.svalero.bestread.contract.BookListContract;
+import com.svalero.bestread.contract.LibraryListContract;
 import com.svalero.bestread.domain.Book;
 import com.svalero.bestread.model.BestReadModel;
 import com.svalero.bestread.model.BookListModel;
@@ -10,22 +11,21 @@ import com.svalero.bestread.view.BookListView;
 
 import java.util.List;
 
-public class BookListPresenter implements BookListContract.Presenter {
+public class BookListPresenter implements BookListContract.Presenter,
+        BookListContract.Model.OnLoadBooksListener{
 
     private BookListModel model;
     private BookListView view;
 
     public BookListPresenter(BookListView view) {
         this.view = view;
-        this.model = new BookListModel(view.getApplicationContext());
+        this.model = new BookListModel();
 
     }
 
     @Override
     public void loadAllBooks() {
-        List<Book> books = model.loadAllBooks();
-        view.showBooks(books);
-
+        model.loadAllBooks(this);
     }
 
     @Override
@@ -36,5 +36,16 @@ public class BookListPresenter implements BookListContract.Presenter {
     @Override
     public void deleteBook(Book book) {
 
+    }
+
+    @Override
+    public void onLoadBooksSuccess(List<Book> books) {
+        view.showBooks(books);
+
+    }
+
+    @Override
+    public void onLoadBooksError(String message) {
+        view.showMessage(message);
     }
 }

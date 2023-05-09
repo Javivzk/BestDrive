@@ -1,34 +1,55 @@
 package com.svalero.bestread.model;
 
-import static com.svalero.bestread.db.Constants.DATABASE_NAME;
+import android.util.Log;
 
-import android.content.Context;
-
-import androidx.room.Room;
-
+import com.svalero.bestread.api.BestReadApi;
+import com.svalero.bestread.api.BestReadApiInterface;
 import com.svalero.bestread.contract.LibraryListContract;
-import com.svalero.bestread.db.AppDatabase;
 import com.svalero.bestread.domain.Library;
 
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class LibraryListModel implements LibraryListContract.Model {
 
-    private Context context;
+    @Override
+    public void loadAllLibraries(OnLoadLibrariesListener listener) {
+        BestReadApiInterface bestReadApi = BestReadApi.buildInstance();
+        Call<List<Library>> callLibraries = bestReadApi.getLibraries();
+        Log.d("libraries", "LLamada desde model");
 
-    public LibraryListModel(Context context) {
-        this.context = context;
+        callLibraries.enqueue(new Callback<List<Library>>() {
+            @Override
+            public void onResponse(Call<List<Library>> call, Response<List<Library>> response) {
+                Log.d("libraries", "LLamada desde model ok");
+
+                List<Library> libraries = response.body();
+                listener.onLoadLibrariesSuccess(libraries);
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Library>> call, Throwable t) {
+                Log.d("libraries", "LLamada desde model error");
+                t.printStackTrace();
+
+                String message = "Error invocando a la operacion";
+                listener.onLoadLibrariesError(message);
+
+            }
+        });
+
+
+//        final AppDatabase db = Room.databaseBuilder(context, AppDatabase.class, DATABASE_NAME)
+//                .allowMainThreadQueries().build();
+//        return db.libraryDao().getAll();
     }
 
     @Override
-    public List<Library> loadAllLibraries() {
-        final AppDatabase db = Room.databaseBuilder(context, AppDatabase.class, DATABASE_NAME)
-                .allowMainThreadQueries().build();
-        return db.libraryDao().getAll();
-    }
-
-    @Override
-    public Library getByName(String name) {
+    public Library loadLibrariesByName(String name) {
         return null;
     }
 
@@ -42,10 +63,6 @@ public class LibraryListModel implements LibraryListContract.Model {
         return null;
     }
 
-    @Override
-    public void deleteByName(String name) {
-
-    }
 
     @Override
     public void insert(Library library) {
@@ -53,8 +70,8 @@ public class LibraryListModel implements LibraryListContract.Model {
     }
 
     @Override
-    public void delete(Library library) {
-
+    public boolean deleteLibrary(String name) {
+        return false;
     }
 
     @Override

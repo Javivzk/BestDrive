@@ -1,8 +1,6 @@
 package com.svalero.bestread.view;
 
-import static com.svalero.bestread.db.Constants.DATABASE_NAME;
 
-import android.database.sqlite.SQLiteConstraintException;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +8,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -26,7 +23,6 @@ import com.mapbox.maps.plugin.gestures.GesturesPlugin;
 import com.mapbox.maps.plugin.gestures.GesturesUtils;
 import com.svalero.bestread.R;
 import com.svalero.bestread.contract.RegisterLibraryContract;
-import com.svalero.bestread.db.AppDatabase;
 import com.svalero.bestread.domain.Library;
 import com.svalero.bestread.presenter.RegisterLibraryPresenter;
 

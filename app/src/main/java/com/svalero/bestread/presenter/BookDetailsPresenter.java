@@ -1,27 +1,38 @@
 package com.svalero.bestread.presenter;
 
 import com.svalero.bestread.contract.BookDetailsContract;
-import com.svalero.bestread.contract.LibraryDetailsContract;
 import com.svalero.bestread.domain.Book;
 import com.svalero.bestread.domain.Library;
 import com.svalero.bestread.model.BookDetailsModel;
-import com.svalero.bestread.model.LibraryDetailsModel;
 import com.svalero.bestread.view.BookDetailsView;
-import com.svalero.bestread.view.LibraryDetailsView;
 
-public class BookDetailsPresenter implements BookDetailsContract.Presenter {
+public class BookDetailsPresenter implements BookDetailsContract.Presenter, BookDetailsContract.Model.OnDetailBookListener {
 
-    private BookDetailsModel model;
-    private BookDetailsView view;
+    private BookDetailsContract.View view;
+    private BookDetailsContract.Model model;
 
-    public BookDetailsPresenter(BookDetailsView view) {
-        model = new BookDetailsModel(view.getApplicationContext());
+    public BookDetailsPresenter(BookDetailsContract.View view) {
         this.view = view;
+        model = new BookDetailsModel();
     }
 
     @Override
-    public void loadBook(String title) {
-        Book book = model.getBook(title);
-        view.showBook(book);
+    public void loadBook(long bookId) {
+        model.loadBook(this, bookId);
     }
+
+    @Override
+    public void onDetailBookSuccess(Book book) {
+        if (view != null) {
+            view.showBook(book);
+        }
+    }
+
+    @Override
+    public void onDetailBookError(String message) {
+        if (view != null) {
+            view.showError(message);
+        }
+    }
+
 }

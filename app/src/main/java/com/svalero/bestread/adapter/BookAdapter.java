@@ -1,7 +1,5 @@
 package com.svalero.bestread.adapter;
 
-import static com.svalero.bestread.db.Constants.DATABASE_NAME;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -12,23 +10,43 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
-import com.svalero.bestread.view.BookDetailsView;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 import com.svalero.bestread.R;
-import com.svalero.bestread.db.AppDatabase;
+import com.svalero.bestread.contract.DeleteBookContract;
 import com.svalero.bestread.domain.Book;
+import com.svalero.bestread.presenter.DeleteBookPresenter;
+import com.svalero.bestread.view.BookDetailsView;
 
 import java.util.List;
 
-public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
+public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder>
+        implements DeleteBookContract.View{
 
     private Context context;
     private List<Book> bookList;
 
+    private Intent intentFrom;
+
+    private DeleteBookPresenter deleteBookPresenter;
+
+    private String token;
+
+    private View snackBarView;
+
+    public Context getContext() {
+        return context;
+    }
+
+
     public BookAdapter(Context context, List<Book> dataList) {
         this.context = context;
         this.bookList = dataList;
+        this.intentFrom = intentFrom;
+        this.token = token;
+        deleteBookPresenter = new DeleteBookPresenter(this);
+
     }
 
     @Override
@@ -42,7 +60,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
     public void onBindViewHolder(BookHolder holder, int position) {
         holder.bookTitle.setText(bookList.get(position).getTitle());
         holder.bookAuthor.setText(bookList.get(position).getAuthor());
-        holder.bookDescription.setText(bookList.get(position).getDescription());
+        holder.bookGenre.setText(bookList.get(position).getGenre());
+
+
+
     }
 
     @Override
@@ -50,8 +71,27 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
         return bookList.size();
     }
 
+    @Override
+    public void showError(String errorMessage) {
+        Snackbar.make(snackBarView, errorMessage,
+                BaseTransientBottomBar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showMessage(String message) {
+        Snackbar.make(snackBarView, message,
+                BaseTransientBottomBar.LENGTH_LONG).show();
+    }
+
     public class BookHolder extends RecyclerView.ViewHolder {
         public TextView bookTitle;
+        public TextView bookCode;
+        public TextView bookYear;
+        public TextView bookGenre;
+        public TextView bookPages;
+        public TextView bookPrice;
+        public TextView bookHasStock;
+
         public TextView bookAuthor;
         public TextView bookDescription;
         public Button seeDetailsBookButton;
@@ -61,11 +101,12 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
         public BookHolder(View view) {
             super(view);
             parentView = view;
+            snackBarView = parentView;
+
 
             bookTitle = view.findViewById(R.id.tv_book_title);
             bookAuthor = view.findViewById(R.id.tv_book_author);
-            bookDescription = view.findViewById(R.id.tv_book_description);
-
+            bookGenre = view.findViewById(R.id.tv_book_genre);
             seeDetailsBookButton = view.findViewById(R.id.see_details_book_button);
             deleteBookButton = view.findViewById(R.id.delete_book_button);
 
@@ -74,27 +115,28 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
             seeDetailsBookButton.setOnClickListener(v -> seeDetails(getAdapterPosition()));
             // Eliminar tarea
             deleteBookButton.setOnClickListener(v -> deleteBook(getAdapterPosition()));
+            //Modificar tarea
+
+
 
         }
     }
 
     private void seeDetails(int position) {
         Book book = bookList.get(position);
-
         Intent intent = new Intent(context, BookDetailsView.class);
-        intent.putExtra("title", book.getTitle());
+        intent.putExtra("bookId", book.getId());
         context.startActivity(intent);
     }
+
 
     private void deleteBook(int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(R.string.are_you_sure_message)
                 .setTitle(R.string.remove_book_message)
                 .setPositiveButton(R.string.yes, ((dialog, id) -> {
-                    final AppDatabase db = Room.databaseBuilder(context, AppDatabase.class, DATABASE_NAME)
-                            .allowMainThreadQueries().build();
                     Book book = bookList.get(position);
-                    db.bookDao().delete(book);
+                    deleteBookPresenter.deleteBook(book.getId());
 
                     bookList.remove(position);
                     notifyItemRemoved(position);
@@ -103,4 +145,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookHolder> {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+
+
 }

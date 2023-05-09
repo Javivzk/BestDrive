@@ -1,27 +1,44 @@
 package com.svalero.bestread.model;
 
-import static com.svalero.bestread.db.Constants.DATABASE_NAME;
-
 import android.content.Context;
+import android.util.Log;
 
-import androidx.room.Room;
-
+import com.svalero.bestread.api.BestReadApi;
+import com.svalero.bestread.api.BestReadApiInterface;
+import com.svalero.bestread.contract.BookDetailsContract;
 import com.svalero.bestread.contract.LibraryDetailsContract;
-import com.svalero.bestread.db.AppDatabase;
+import com.svalero.bestread.domain.Book;
 import com.svalero.bestread.domain.Library;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LibraryDetailsModel implements LibraryDetailsContract.Model {
 
-    private Context context;
-
-    public LibraryDetailsModel(Context context) {
-        this.context = context;
-    }
 
     @Override
-    public Library getLibrary(String name) {
-        final AppDatabase db = Room.databaseBuilder(context, AppDatabase.class, DATABASE_NAME)
-                .allowMainThreadQueries().build();
-        return db.libraryDao().getByName(name);
+    public void loadLibrary(OnDetailLibraryListener listener, long libraryId) {
+        BestReadApiInterface bestReadApiInterface = BestReadApi.buildInstance();
+        Call<Library> callLibrary = bestReadApiInterface.getLibrary(libraryId);
+        callLibrary.enqueue(new Callback<Library>() {
+            @Override
+            public void onResponse(Call<Library> call, Response<Library> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Library library = response.body();
+                    listener.onDetailLibrarySuccess(library);
+                } else {
+                    listener.onDetailLibraryError("Error al recuperar la biblioteca");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Library> call, Throwable t) {
+                t.printStackTrace();
+                String message = "Error invocando a la operación";
+                listener.onDetailLibraryError(message);
+            }
+        });
     }
+
 }

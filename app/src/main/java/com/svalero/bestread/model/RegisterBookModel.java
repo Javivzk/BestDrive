@@ -1,36 +1,43 @@
 package com.svalero.bestread.model;
 
-import static com.svalero.bestread.db.Constants.DATABASE_NAME;
-
-import android.content.Context;
 import android.database.sqlite.SQLiteConstraintException;
 
-import androidx.room.Room;
-
+import com.svalero.bestread.api.BestReadApi;
+import com.svalero.bestread.api.BestReadApiInterface;
 import com.svalero.bestread.contract.RegisterBookContract;
-import com.svalero.bestread.contract.RegisterLibraryContract;
-import com.svalero.bestread.db.AppDatabase;
 import com.svalero.bestread.domain.Book;
 import com.svalero.bestread.domain.Library;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class RegisterBookModel implements RegisterBookContract.Model {
 
-    private Context context;
-
-    public RegisterBookModel(Context context) {
-        this.context =  context;
-    }
 
     @Override
-    public boolean registerBook(Book book) {
+    public void registerBook(Book book, RegisterBookContract.Model.OnRegisterBookListener listener) {
         try {
-            final AppDatabase db = Room.databaseBuilder(context, AppDatabase.class, DATABASE_NAME)
-                    .allowMainThreadQueries().build();
-            db.bookDao().insert(book);
-            return true;
+            BestReadApiInterface bestReadApi = BestReadApi.buildInstance();
+            Call<Book> callBooks = bestReadApi.addBook(book);
+            callBooks.enqueue(new Callback<Book>() {
+                @Override
+                public void onResponse(Call<Book> call, Response<Book> response) {
+                    Book book = response.body();
+                    listener.onRegisterBookSuccess(book);
+
+                }
+
+                @Override
+                public void onFailure(Call<Book> call, Throwable t) {
+                    t.printStackTrace();
+                    String message = "Error invocando a la operacion";
+                    listener.onRegisterBookError(message);
+
+                }
+            });
         }catch (SQLiteConstraintException sce) {
             sce.printStackTrace();
-            return false;
         }
     }
 }

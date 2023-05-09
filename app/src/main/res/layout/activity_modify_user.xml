@@ -49,6 +49,25 @@
         tools:layout_editor_absoluteX="-178dp">
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_modifyUserId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_Id"
+            android:textAlignment="center"
+            android:textColor="#555555"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_modifyUserId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColor="#555555" />
+
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_modifyUserTitleName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

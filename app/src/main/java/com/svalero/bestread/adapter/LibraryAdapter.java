@@ -1,7 +1,5 @@
 package com.svalero.bestread.adapter;
 
-import static com.svalero.bestread.db.Constants.DATABASE_NAME;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -13,25 +11,36 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
-
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 import com.svalero.bestread.R;
-import com.svalero.bestread.view.LibraryDetailsView;
+import com.svalero.bestread.contract.DeleteLibraryContract;
 import com.svalero.bestread.domain.Library;
-import com.svalero.bestread.db.AppDatabase;
+import com.svalero.bestread.presenter.DeleteLibraryPresenter;
+import com.svalero.bestread.view.LibraryDetailsView;
 
 import java.util.List;
 
-
-public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryHolder> {
+public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryHolder>
+        implements DeleteLibraryContract.View {
 
     private Context context;
     private List<Library> libraryList;
+    private View snackBarView;
+    private Intent intentFrom;
+
+    private DeleteLibraryPresenter presenter;
+
+    public Context getContext() {
+        return context;
+    }
 
     public LibraryAdapter(Context context, List<Library> dataList) {
         this.context = context;
         this.libraryList = dataList;
+        this.intentFrom = intentFrom;
+        presenter = new DeleteLibraryPresenter(this);
     }
 
     @Override
@@ -53,6 +62,18 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryH
         return libraryList.size();
     }
 
+    @Override
+    public void showError(String errorMessage) {
+        Snackbar.make(snackBarView, errorMessage,
+                BaseTransientBottomBar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showMessage(String message) {
+        Snackbar.make(snackBarView, message,
+                BaseTransientBottomBar.LENGTH_LONG).show();
+    }
+
     public class LibraryHolder extends RecyclerView.ViewHolder {
         public TextView libraryName;
         public TextView libraryDescription;
@@ -65,6 +86,7 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryH
         public LibraryHolder(View view) {
             super(view);
             parentView = view;
+            snackBarView = parentView;
 
             libraryName = view.findViewById(R.id.tv_library_name);
             libraryDescription = view.findViewById(R.id.tv_library_description);
@@ -87,18 +109,17 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryH
         Library library = libraryList.get(position);
         library.setVerify(true);
 
-        final AppDatabase db = Room.databaseBuilder(context, AppDatabase.class, DATABASE_NAME)
-                .allowMainThreadQueries().build();
-        db.libraryDao().update(library);
+//        final AppDatabase db = Room.databaseBuilder(context, AppDatabase.class, DATABASE_NAME)
+//                .allowMainThreadQueries().build();
+//        db.libraryDao().update(library);
 
         notifyItemChanged(position);
     }
 
     private void seeDetails(int position) {
         Library library = libraryList.get(position);
-
         Intent intent = new Intent(context, LibraryDetailsView.class);
-        intent.putExtra("name", library.getName());
+        intent.putExtra("libraryId", library.getId());
         context.startActivity(intent);
     }
 
@@ -107,10 +128,8 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryH
         builder.setMessage(R.string.are_you_sure_message)
                 .setTitle(R.string.remove_book_message)
                 .setPositiveButton(R.string.yes, ((dialog, id) -> {
-                    final AppDatabase db = Room.databaseBuilder(context, AppDatabase.class, DATABASE_NAME)
-                            .allowMainThreadQueries().build();
                     Library library = libraryList.get(position);
-                    db.libraryDao().delete(library);
+                    presenter.deleteLibrary(library.getId());
 
                     libraryList.remove(position);
                     notifyItemRemoved(position);

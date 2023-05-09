@@ -5,7 +5,11 @@ import com.svalero.bestread.domain.Library;
 public interface RegisterLibraryContract {
 
     interface Model {
-        boolean registerLibrary (Library library);
+        interface OnRegisterLibraryListener {
+            void onRegisterLibrarySuccess(Library library);
+            void onRegisterLibraryError(String message);
+        }
+        void registerLibrary (Library library, OnRegisterLibraryListener listener);
     }
 
     interface View {

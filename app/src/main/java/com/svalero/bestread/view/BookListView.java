@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +32,7 @@ public class BookListView extends AppCompatActivity implements BookListContract.
         setContentView(R.layout.activity_book_list);
 
         presenter = new BookListPresenter(this);
+
 
         initializeRecyclerView();
     }
@@ -86,6 +88,6 @@ public class BookListView extends AppCompatActivity implements BookListContract.
 
     @Override
     public void showMessage(String message) {
-
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }

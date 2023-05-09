@@ -1,34 +1,42 @@
 package com.svalero.bestread.model;
 
-import static com.svalero.bestread.db.Constants.DATABASE_NAME;
 
-import android.content.Context;
 import android.database.sqlite.SQLiteConstraintException;
 
-import androidx.room.Room;
-
+import com.svalero.bestread.api.BestReadApi;
+import com.svalero.bestread.api.BestReadApiInterface;
 import com.svalero.bestread.contract.RegisterLibraryContract;
-import com.svalero.bestread.db.AppDatabase;
 import com.svalero.bestread.domain.Library;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegisterLibraryModel implements RegisterLibraryContract.Model {
 
-    private Context context;
-
-    public RegisterLibraryModel(Context context) {
-        this.context =  context;
-    }
-
     @Override
-    public boolean registerLibrary(Library library) {
+    public void registerLibrary(Library library, OnRegisterLibraryListener listener) {
         try {
-            final AppDatabase db = Room.databaseBuilder(context, AppDatabase.class, DATABASE_NAME)
-                    .allowMainThreadQueries().build();
-            db.libraryDao().insert(library);
-            return true;
+            BestReadApiInterface bestReadApi = BestReadApi.buildInstance();
+            Call<Library> callLibraries = bestReadApi.addLibrary(library);
+            callLibraries.enqueue(new Callback<Library>() {
+                @Override
+                public void onResponse(Call<Library> call, Response<Library> response) {
+                    Library library = response.body();
+                    listener.onRegisterLibrarySuccess(library);
+
+                }
+
+                @Override
+                public void onFailure(Call<Library> call, Throwable t) {
+                    t.printStackTrace();
+                    String message = "Error invocando a la operacion";
+                    listener.onRegisterLibraryError(message);
+
+                }
+            });
         }catch (SQLiteConstraintException sce) {
             sce.printStackTrace();
-            return false;
         }
     }
 }

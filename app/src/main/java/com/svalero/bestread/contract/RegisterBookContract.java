@@ -6,7 +6,11 @@ import com.svalero.bestread.domain.Library;
 public interface RegisterBookContract {
 
     interface Model {
-        boolean registerBook (Book book);
+        interface OnRegisterBookListener {
+            void onRegisterBookSuccess(Book book);
+            void onRegisterBookError(String message);
+        }
+        void registerBook (Book book, OnRegisterBookListener listener);
     }
 
     interface View {
