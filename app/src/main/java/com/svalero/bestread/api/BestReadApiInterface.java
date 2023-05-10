@@ -64,5 +64,4 @@ public interface BestReadApiInterface {
     @GET("user")
     Call<User> getUserLogin(@Query("username") String username, @Query("password") String password);
 
-
 }

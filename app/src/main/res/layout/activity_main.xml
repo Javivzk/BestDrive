@@ -48,6 +48,13 @@
             android:drawableLeft="@drawable/map_search_find_maps_10803"
             android:text="@string/view_map" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/viewFavourites"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@android:drawable/btn_star"
+            android:text="@string/view_favorites" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

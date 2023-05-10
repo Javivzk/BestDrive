@@ -89,6 +89,13 @@
     <string name="pages">Pages</string>
     <string name="price">Price</string>
     <string name="hasStock">Has Stock</string>
+    <string name="favorites">Add to favorites</string>
+    <string name="view_favorites">View favorites</string>
+    <string name="no_favorites">No favorites</string>
+
+
+
+
 
 
 </resources>

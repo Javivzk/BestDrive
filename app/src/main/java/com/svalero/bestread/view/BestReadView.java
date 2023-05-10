@@ -40,6 +40,8 @@ public class BestReadView extends AppCompatActivity implements View.OnClickListe
         viewLibraryButton.setOnClickListener(this);
         Button viewBookButton = findViewById(R.id.viewBookButton);
         viewBookButton.setOnClickListener(this);
+        Button favouritesButton = findViewById(R.id.viewFavourites);
+        favouritesButton.setOnClickListener(this);
 
         Toast.makeText(this, R.string.remember_message,Toast.LENGTH_SHORT).show();
     }
@@ -54,6 +56,9 @@ public class BestReadView extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         } else if (view.getId() == R.id.viewBookButton) {
             Intent intent = new Intent(this, BookListView.class);
+            startActivity(intent);
+        } else if (view.getId() == R.id.viewFavourites) {
+            Intent intent = new Intent(this, FavoritesView.class);
             startActivity(intent);
     }
     }

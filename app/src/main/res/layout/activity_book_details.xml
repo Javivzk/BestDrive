@@ -73,11 +73,11 @@
             android:text="@string/modify" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/deleteButton"
+            android:id="@+id/back_button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="deleteBook"
-            android:text="@string/delete" />
+            android:onClick="goBackButton"
+            android:text="@string/return_message" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

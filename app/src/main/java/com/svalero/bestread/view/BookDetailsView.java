@@ -6,10 +6,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import com.svalero.bestread.R;
 import com.svalero.bestread.contract.BookDetailsContract;
@@ -56,7 +58,6 @@ public class BookDetailsView extends AppCompatActivity implements BookDetailsCon
 
         bookId = intent.getLongExtra("bookId",0);
         if (bookId == 0) {
-            Log.d("BookDetailsView", "bookId is 0");
             return;
         }
 
@@ -78,10 +79,6 @@ public class BookDetailsView extends AppCompatActivity implements BookDetailsCon
         updatedBook.setDescription(descriptionField.getText().toString());
         updatedBook.setTitle(titleField.getText().toString());
 
-
-
-        Log.d("BookDetailsView", "updatedBook: " + updatedBook);
-        Log.d("BookDetailsView", "loadedBook: " + loadedBook);
 
         modifyPresenter.modifyBook(updatedBook, bookId);
     }
@@ -105,6 +102,9 @@ public class BookDetailsView extends AppCompatActivity implements BookDetailsCon
 
         loadedBook = book;
     }
+    public void goBackButton(View view) {
+        onBackPressed();
+    }
 
     @Override
     public void showError(String message) {
@@ -113,7 +113,7 @@ public class BookDetailsView extends AppCompatActivity implements BookDetailsCon
 
     @Override
     public void showMessage(String message) {
-        // No es necesario hacer nada aquí
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
 }

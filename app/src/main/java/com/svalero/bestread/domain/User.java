@@ -7,13 +7,9 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class User {
-
-    @PrimaryKey(autoGenerate = true)
-    private long id;
-
-    @ColumnInfo
+    @PrimaryKey
     @NonNull
-    private String userName;
+    private String username;
 
     @ColumnInfo
     private String password;
@@ -31,8 +27,8 @@ public class User {
     private String pathImg = "";
 
 
-    public User(String userName, String password, String name, String lastName, String email, String phone, String pathImg) {
-        this.userName = userName;
+    public User(String username, String password, String name, String lastName, String email, String phone, String pathImg) {
+        this.username = username;
         this.password = password;
         this.name = name;
         this.lastName = lastName;
@@ -41,21 +37,12 @@ public class User {
     }
 
     public User(String username, String password, String name, String lastName, String email, String phone) {
-        this.userName = userName;
+        this.username = username;
         this.password = password;
         this.name = name;
         this.lastName = lastName;
         this.email = email;
         this.phone = phone;
-    }
-
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public User() {}
@@ -85,8 +72,8 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
     public String getPassword() {
@@ -97,8 +84,8 @@ public class User {
         this.password = password;
     }
 
-    public void setUserName(String nick) {
-        this.userName = nick;
+    public void setUsername(String nick) {
+        this.username = nick;
     }
 
     public String getPhone() {
