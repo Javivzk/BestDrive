@@ -132,6 +132,21 @@
                 android:value="" />
         </activity>
 
+        <activity
+            android:name=".view.LoginView"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".view.FavoritesView"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
 
         <meta-data
             android:name="preloaded_fonts"

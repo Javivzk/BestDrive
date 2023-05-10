@@ -24,6 +24,7 @@ public class Library {
     @ColumnInfo
     private double longitude;
 
+
     public Library(){
 
     }

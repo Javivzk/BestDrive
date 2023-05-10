@@ -90,6 +90,11 @@
     <string name="pages">Paginas</string>
     <string name="price">Precio</string>
     <string name="hasStock">Tiene Stock</string>
+    <string name="favorites">Añadir a favoritos</string>
+    <string name="view_favorites">Ver favoritos</string>
+    <string name="no_favorites">No favoritos</string>
+
+
 
 
 </resources>

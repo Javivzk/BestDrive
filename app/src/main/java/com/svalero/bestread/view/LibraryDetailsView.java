@@ -1,24 +1,24 @@
 package com.svalero.bestread.view;
 
-import android.content.Context;
+import static com.svalero.bestread.api.Constants.DATABASE_NAME;
+
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import com.svalero.bestread.R;
 import com.svalero.bestread.contract.LibraryDetailsContract;
-import com.svalero.bestread.contract.ModifyBookContract;
 import com.svalero.bestread.contract.ModifyLibraryContract;
-import com.svalero.bestread.domain.Book;
+import com.svalero.bestread.db.BestReadDatabase;
+import com.svalero.bestread.domain.FavoritesLibraries;
 import com.svalero.bestread.domain.Library;
 import com.svalero.bestread.presenter.LibraryDetailsPresenter;
-import com.svalero.bestread.presenter.ModifyBookPresenter;
 import com.svalero.bestread.presenter.ModifyLibraryPresenter;
 
 
@@ -29,13 +29,25 @@ public class LibraryDetailsView extends AppCompatActivity implements LibraryDeta
 
     long libraryId;
 
+    private Library library;
+    private EditText etName;
+    private EditText etDescription;
+    private EditText etCity;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library_details);
 
-        presenter = new LibraryDetailsPresenter(this);
-        modifyPresenter = new ModifyLibraryPresenter(this);
+        Button btnAddFavorite = findViewById(R.id.btn_add_favorite);
+        btnAddFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setFavorite();
+            }
+        });
 
 
         Intent intent = getIntent();
@@ -43,11 +55,13 @@ public class LibraryDetailsView extends AppCompatActivity implements LibraryDeta
         if (libraryId == 0)
             return;
 
-        SharedPreferences preferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
-        String username = preferences.getString("username" ,"");
-        String password = preferences.getString("password", "");
-
+        presenter = new LibraryDetailsPresenter(this);
+        etName = findViewById(R.id.et_library_name);
+        etDescription = findViewById(R.id.et_library_description);
+        etCity = findViewById(R.id.et_library_description);
+        modifyPresenter = new ModifyLibraryPresenter(this);
         presenter.loadLibrary(libraryId);
+
     }
 
 //    public void modifyLibrary(View view) {
@@ -102,7 +116,30 @@ public class LibraryDetailsView extends AppCompatActivity implements LibraryDeta
 
 
         modifyPresenter.modifyLibrary(updatedLibrary, libraryId);
+
     }
+    public void goBackButton(View view) {
+        onBackPressed();
+    }
+
+    public void setFavorite() {
+        FavoritesLibraries favorites = new FavoritesLibraries();
+        favorites.setId(this.library.getId());  // Pasamos el id de la librería actual
+        favorites.setLibraryId(this.libraryId); // Pasamos el id de la librería actual
+        favorites.setLibraryName(this.library.getName()); // Pasamos el nombre de la librería actual
+        favorites.setLibraryDescription(this.library.getDescription());
+        favorites.setLibraryCity(this.library.getCity());
+
+        final BestReadDatabase db = Room.databaseBuilder(this, BestReadDatabase.class, DATABASE_NAME)
+                .allowMainThreadQueries().build();
+
+        db.getFavoriteDAO().insert(favorites);
+
+        Toast.makeText(this, "Se ha añadido a Favoritos", Toast.LENGTH_SHORT).show();
+    }
+
+
+
 
 
     @Override
@@ -114,6 +151,8 @@ public class LibraryDetailsView extends AppCompatActivity implements LibraryDeta
         etName.setText(library.getName());
         etDescription.setText(library.getDescription());
         etOwner.setText(library.getCity());
+        this.library = library;
+
     }
 
     @Override
@@ -121,8 +160,12 @@ public class LibraryDetailsView extends AppCompatActivity implements LibraryDeta
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
+
     @Override
     public void showMessage(String message) {
-        // No es necesario hacer nada aquí
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
+
+
+
 }

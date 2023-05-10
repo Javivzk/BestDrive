@@ -3,6 +3,7 @@ package com.svalero.bestread.view;
 
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -62,6 +63,11 @@ public class LibraryMapView extends AppCompatActivity implements LibraryListCont
     public void showMessage(String message) {
 
     }
+
+    public void goBackButton(View view) {
+        onBackPressed();
+    }
+
 
     private void initializePointManager() {
         AnnotationPlugin annotationPlugin = AnnotationPluginImplKt.getAnnotations(mapView);

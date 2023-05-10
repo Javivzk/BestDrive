@@ -85,7 +85,8 @@ public class RegisterLibraryView extends AppCompatActivity implements RegisterLi
     private void addMarker(Point point) {
         PointAnnotationOptions pointAnnotationOptions = new PointAnnotationOptions()
                 .withPoint(point)
-                .withIconImage(BitmapFactory.decodeResource(getResources(), R.drawable.red_marker));
+                .withIconImage(BitmapFactory.decodeResource(getResources(), R.drawable.red_marker))
+                .withIconSize(0.5f);
         pointAnnotationManager.create(pointAnnotationOptions);
     }
 

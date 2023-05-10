@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -38,6 +39,11 @@ public class LibraryListView extends AppCompatActivity implements LibraryListCon
         initializeRecyclerView();
 
     }
+
+    public void goBackButton(View view) {
+        onBackPressed();
+    }
+
 
     private void initializeRecyclerView() {
         libraryList = new ArrayList<>();
